@@ -9,7 +9,7 @@
   #fit{position:relative;width:100%;max-width:1280px;overflow:hidden;border-radius:16px;box-shadow:0 24px 70px rgba(10,27,51,0.28);}
   #stage{position:absolute;top:0;left:0;width:1280px;height:800px;transform-origin:top left;background:#FBF8F3;display:flex;flex-direction:column;}
   /* app bar */
-  #appbar{height:80px;flex:none;display:flex;align-items:center;justify-content:flex-start;gap:24px;padding:0 40px;border-bottom:1px solid #ECE5DA;background:#FFFFFF;}
+  #appbar{height:80px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid #ECE5DA;background:#FFFFFF;}
   /* body: canvas + save rail */
   #body{flex:1;display:flex;min-height:0;}
   #canvas{flex:1;padding:34px 44px;overflow-y:auto;}
@@ -489,7 +489,7 @@
     c.addEventListener('click',function(){ openPDP(prod); });
   });
   function openPDP(prod){ ensureInTray(prod); document.getElementById('pdpName').textContent='22KT Yellow Gold with Stone Neckwear - Choker.'; document.getElementById('pdpImg').src=prod.img; document.getElementById('pdpTotal').textContent=prod.price; var v=document.getElementById('viewPDP'); v.setAttribute('data-name',prod.name); v.setAttribute('data-price',prod.price); v.setAttribute('data-img',prod.img); v.setAttribute('data-cat',prod.cat); showView('viewPDP'); }
-  document.getElementById('pdpBack').onclick=function(){ showView('viewCatalogue'); };
+  var _pdpBack=document.getElementById('pdpBack'); if(_pdpBack) _pdpBack.onclick=function(){ showView('viewCatalogue'); };
   var _pab=document.getElementById('pdpAdd'); if(_pab) _pab.onclick=function(){var v=document.getElementById('viewPDP'); var ok=addToTray({name:v.getAttribute('data-name'),price:v.getAttribute('data-price'),cat:v.getAttribute('data-cat'),img:v.getAttribute('data-img')}); if(ok){this.textContent='Added to selection \u2713';this.style.background='#E7CB8E';} };
   function estrow(l,v,bold){var fw=bold?'700':'500';var bt=bold?'border-top:0.5px solid #E2EBFF;padding-top:6px;':'';return '<div style="display:flex;align-items:center;justify-content:space-between;'+bt+'"><div style="width:120px;padding:4px 12px;"><span style="font-family:\'DM Sans\';font-weight:'+fw+';font-size:14px;color:#6B6460;">'+l+'</span></div><div style="width:120px;padding:4px 12px;text-align:right;"><span style="font-family:\'DM Sans\';font-weight:'+fw+';font-size:14px;color:#1a1917;">'+v+'</span></div></div>';}
   function openEstimate(){ var grand=0; var html='<div style="border:1px solid #E2EBFF;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:12px;">';
