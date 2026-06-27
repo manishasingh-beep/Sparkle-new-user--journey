@@ -86,6 +86,8 @@
 
   .clkTime{font-variant-numeric:tabular-nums;display:inline-block;min-width:42px;text-align:left;}
   .clkState{display:inline-block;min-width:46px;}
+  @keyframes clkPulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+  .clkDot.live{animation:clkPulse 1.8s ease-in-out infinite;}
 
   #viewPDP{background:#FCFAF7;}
 </style></head>
@@ -425,11 +427,11 @@
   var ib2=document.getElementById('imgBtn'); if(ib2) ib2.onclick=function(){toast('Snap or upload a photo to find similar pieces.');};
   var sessStarted=false,sessSecs=0,sessIv=null;
   function _pad(n){return (n<10?'0':'')+n;}
-  function renderClock(){var ts=_pad(Math.floor(sessSecs/60))+':'+_pad(sessSecs%60);document.querySelectorAll('.clkTime').forEach(function(e){e.textContent=ts;});document.querySelectorAll('.clkDot').forEach(function(e){e.style.background=sessStarted?'#1F9D55':'#C9BFB0';});document.querySelectorAll('.clkState').forEach(function(e){e.textContent=sessStarted?'active':'ready';});}
+  function renderClock(){var ts=_pad(Math.floor(sessSecs/60))+':'+_pad(sessSecs%60);document.querySelectorAll('.clkTime').forEach(function(e){e.textContent=ts;});document.querySelectorAll('.clkDot').forEach(function(e){e.style.background=sessStarted?'#1F9D55':'#C9BFB0';e.classList.toggle('live',sessStarted);});document.querySelectorAll('.clkState').forEach(function(e){e.textContent=sessStarted?'active':'ready';});document.querySelectorAll('.clkLabel').forEach(function(e){e.style.color=sessStarted?'#1F9D55':'#7C7268';});}
   function _tick(){sessSecs++;renderClock();}
   function startSession(){if(sessStarted)return;sessStarted=true;renderClock();sessIv=setInterval(_tick,1000);}
   function stopSession(){sessStarted=false;if(sessIv){clearInterval(sessIv);sessIv=null;}sessSecs=0;renderClock();}
-  function makeClock(){var w=document.createElement('span');w.className='sessClock';w.style.cssText='display:flex;align-items:center;gap:8px;margin-right:4px;';w.innerHTML='<span class="clkDot" style="width:7px;height:7px;border-radius:50%;background:#C9BFB0;"></span><span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;white-space:nowrap;">Session <span class="clkState">ready</span> &middot; <span class="clkTime">00:00</span></span>';return w;}
+  function makeClock(){var w=document.createElement('span');w.className='sessClock';w.style.cssText='display:flex;align-items:center;gap:8px;margin-right:4px;';w.innerHTML='<span class="clkDot" style="width:7px;height:7px;border-radius:50%;background:#C9BFB0;"></span><span class="clkLabel" style="font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;white-space:nowrap;">Session <span class="clkState">ready</span> &middot; <span class="clkTime">00:00</span></span>';return w;}
     renderClock();
   var _cv=document.getElementById('canvas'); if(_cv) _cv.addEventListener('click',function(e){ if(e.target.closest('.cat,.chip')) startSession(); }, true);
   var _agb=document.getElementById('addGuestBtn'); if(_agb) _agb.onclick=function(){ showState('new'); };
@@ -533,7 +535,7 @@
     var WORDSRC=refImgs[0]?refImgs[0].src:'', GOLDSRC=refImgs[1]?refImgs[1].src:'', ABJSRC=refImgs[2]?refImgs[2].src:'';
     function bar(hasBack, backTarget){
       var back = hasBack ? '<button class="navback" data-bt="'+backTarget+'" style="width:38px;height:38px;border:1px solid #E2DAC9;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;">'+AL+'</button>' : '';
-      var clock = '<span class="sessClock" style="display:flex;align-items:center;gap:8px;"><span class="clkDot" style="width:7px;height:7px;border-radius:50%;background:#C9BFB0;"></span><span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;white-space:nowrap;">Session <span class="clkState">ready</span> &middot; <span class="clkTime">00:00</span></span></span>';
+      var clock = '<span class="sessClock" style="display:flex;align-items:center;gap:8px;"><span class="clkDot" style="width:7px;height:7px;border-radius:50%;background:#C9BFB0;"></span><span class="clkLabel" style="font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;white-space:nowrap;">Session <span class="clkState">ready</span> &middot; <span class="clkTime">00:00</span></span></span>';
       var end = '<span class="endSess" style="font-family:DM Sans,sans-serif;font-weight:600;font-size:13px;color:#B0432F;cursor:pointer;padding:8px 14px;border:1px solid #ECD9D2;border-radius:8px;white-space:nowrap;">End session</span>';
       var word = '<img src="'+WORDSRC+'" style="height:30px;"/>';
       var divider = '<span style="width:1px;height:34px;background:#ECE5DA;flex:none;"></span>';
@@ -553,7 +555,7 @@
     document.querySelectorAll('.navback').forEach(function(b){b.onclick=function(){var t=b.getAttribute('data-bt'); showView(t==='__cat__'?catFrom:t);};});
   })();
   function setChips(){var nm=(CUR&&CUR.name)?CUR.name:'Guest';var t=(CUR&&CUR.tier)?CUR.tier:'New guest';var pt=(CUR&&CUR.points&&CUR.points!=='0')?(CUR.points+' loyalty points'):'Loyalty starts today';document.querySelectorAll('.chipName').forEach(function(e){e.textContent=nm;});document.querySelectorAll('.chipTier').forEach(function(e){e.textContent=t;});document.querySelectorAll('.chipPts').forEach(function(e){e.textContent=pt;});}
-  updateChrome=function(){setChips();var det=!!(CUR&&CUR.detailed);document.querySelectorAll('.custChip').forEach(function(e){e.style.display=det?'flex':'none';});document.querySelectorAll('.addGuest').forEach(function(e){e.style.display=det?'none':'inline-flex';});};
+  updateChrome=function(){setChips();var det=!!(CUR&&CUR.detailed);document.querySelectorAll('.custChip').forEach(function(e){e.style.display=det?'flex':'none';});document.querySelectorAll('.addGuest').forEach(function(e){e.style.display=(CUR&&!CUR.detailed)?'inline-flex':'none';});};
   var __ss=showState; showState=function(s){__ss(s); updateChrome();};
   var __sc=showCatalogue; showCatalogue=function(){__sc(); updateChrome();};
   var __op=openPDP; openPDP=function(pp){__op(pp); updateChrome();};
