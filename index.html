@@ -489,7 +489,7 @@
   var fit=document.getElementById('fit'),stage=document.getElementById('stage');
   function resize(){var s=fit.clientWidth/1280;stage.style.transform='scale('+s+')';fit.style.height=(800*s)+'px';}
   resize();window.addEventListener('resize',resize);
-  var PROFILE={name:'Manisha Singh',init:'MS',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026'};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE};
+  var PROFILE={name:'Manisha Singh',init:'MS',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',dob:'11 / 06 / 1990',email:'manisha.singh@gmail.com'};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE};
   var sel={cats:[],occ:null,who:null,'for':null,budget:null};
   var phone=document.getElementById('phone');
   var saveBtn=document.getElementById('saveBtn'),saveLbl=document.getElementById('saveLbl');
@@ -559,7 +559,7 @@
   function showProfile(k){CUR=k;var chips=interestChips();var box=document.getElementById('pfInterest');if(box){if(chips.length){box.style.display='block';var pc=document.getElementById('pfInterestChips');if(pc)pc.innerHTML=chips.map(function(x){return '<span class="pillsum">'+x+'</span>';}).join('');}else{box.style.display='none';}}showView('viewProfile');}
   function showCatalogue(){setCatChip();showView('viewCatalogue');}
   doneReturning=function(k){k.detailed=true;showProfile(k);};
-  var _origNew=doneNew; doneNew=function(){var nm=(document.getElementById('nName').value||'').trim();CUR={name:nm||'Guest',tier:'New · Indriya Circle',points:'0',detailed:true};_origNew();};
+  var _origNew=doneNew; doneNew=function(){var nm=(document.getElementById('nName').value||'').trim();var em=(document.getElementById('nEmail').value||'').trim();var bd=(document.getElementById('nBday').value||'').trim();CUR={name:nm||'Guest',tier:'New · Indriya Circle',points:'0',detailed:true,email:em,dob:bd};_origNew();};
   var _origNum=doneNumberOnly; doneNumberOnly=function(){CUR={name:'Guest',tier:'Walk-in',points:'0',detailed:false};_origNum();};
   saveBtn.onclick=function(){if(saveBtn.classList.contains('disabled'))return;var k=KNOWN[phone.value];if(k){doneReturning(k);}else{showState('new');}};
   document.getElementById('skipBtn').onclick=function(){doneNumberOnly();};
@@ -664,7 +664,7 @@
   document.querySelectorAll('#viewCatalogue .estBtn').forEach(function(b){ if(b.firstChild) b.firstChild.nodeValue='View product description page '; b.onclick=function(){ if(tray.length) openPDP(tray[tray.length-1]); }; });
   document.getElementById('estClose').onclick=closeEstimate;
   document.getElementById('estBackdrop').onclick=closeEstimate;
-  document.getElementById('estContinue').onclick=function(){ var act=['viewSession','viewProfile','viewCatalogue','viewPDP'].filter(function(v){var e=document.getElementById(v);return e&&getComputedStyle(e).display!=='none';})[0]||'viewCatalogue'; window.__billReturn=act; var known=!!(CUR&&CUR.detailed); var ph=document.getElementById('phone'); var nn=document.getElementById('bfNum'); if(nn) nn.value=known&&ph?(ph.value||''):''; var na=document.getElementById('bfName'); if(na) na.value=known&&CUR?(CUR.name||''):''; document.querySelectorAll('#viewBilling .tenderChk.on').forEach(function(c){c.classList.remove('on');}); closeEstimate(); showView('viewBilling'); if(window.__billSync)window.__billSync(); };
+  document.getElementById('estContinue').onclick=function(){ var act=['viewSession','viewProfile','viewCatalogue','viewPDP'].filter(function(v){var e=document.getElementById(v);return e&&getComputedStyle(e).display!=='none';})[0]||'viewCatalogue'; window.__billReturn=act; var known=!!(CUR&&CUR.detailed); var ph=document.getElementById('phone'); var nn=document.getElementById('bfNum'); if(nn) nn.value=known&&ph?(ph.value||''):''; var na=document.getElementById('bfName'); if(na) na.value=known&&CUR?(CUR.name||''):''; var nd=document.getElementById('bfDob'); if(nd) nd.value=known&&CUR&&CUR.dob?CUR.dob:''; var ne=document.getElementById('bfEmail'); if(ne) ne.value=known&&CUR&&CUR.email?CUR.email:''; document.querySelectorAll('#viewBilling .tenderChk.on').forEach(function(c){c.classList.remove('on');}); closeEstimate(); showView('viewBilling'); if(window.__billSync)window.__billSync(); };
   (function(){
     function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
     function billSync(){ var okv=val('bfNum')&&val('bfName')&&val('bfAddr')&&document.querySelectorAll('#viewBilling .tenderChk.on').length>0; var pr=document.getElementById('billProceed'); if(pr){pr.style.opacity=okv?'1':'0.5';pr.style.pointerEvents=okv?'auto':'none';} }
