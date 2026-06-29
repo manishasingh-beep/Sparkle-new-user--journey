@@ -62,7 +62,7 @@
   
   .traythumb{position:relative;width:64px;height:64px;border-radius:11px;border:1px solid #E8E1D6;flex:none;background:#F4EEE4;} .traythumb img{border-radius:10px;}
   .traythumb img{width:100%;height:100%;object-fit:cover;}
-  .traythumb .x{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#0A2A66;border:1.5px solid #fff;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;line-height:1;z-index:5;box-shadow:0 1px 4px rgba(0,0,0,0.28);}
+  .traythumb .x{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#fff;border:1.5px solid #0A2A66;color:#0A2A66;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;line-height:1;z-index:5;box-shadow:0 1px 3px rgba(10,27,51,0.18);}
   .estItem{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid #EFE8DC;border-radius:14px;padding:12px;}
 
   .gnf{display:flex;align-items:center;gap:10px;height:48px;border:1px solid #E2DAC9;border-radius:11px;background:#FFFDF9;padding:0 14px;}
@@ -95,6 +95,9 @@
   .billField:focus{border-color:#C4D5FB;box-shadow:0 0 0 3px rgba(196,213,251,0.35);}
   textarea.billField{height:auto;min-height:78px;padding:11px 14px;resize:none;line-height:20px;}
   #vfList .vfRow{display:flex;align-items:center;justify-content:space-between;padding:6px 0;}
+  .otpBox{width:54px;height:60px;border:1px solid #E2DAC9;border-radius:12px;background:#fff;text-align:center;font-family:'DM Sans',sans-serif;font-weight:600;font-size:22px;color:#0A2A66;outline:none;transition:border-color .15s,box-shadow .15s;}
+  .otpBox:focus{border-color:#C4D5FB;box-shadow:0 0 0 3px rgba(196,213,251,0.35);}
+  .otpBox.filled{border-color:#C4D5FB;}
   .sigBox{width:100%;height:100px;border:1px dashed #A89B93;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:#FCFBF9;transition:border-color .15s;}
   .sigBox.signed{border-style:solid;border-color:#C4D5FB;background:#fff;}
   @keyframes profRise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
@@ -140,6 +143,8 @@
   .doneSeal .sealCore{transform-origin:center;animation:sealPop .6s cubic-bezier(.34,1.56,.64,1) both;}
   .doneSeal .ringPath{stroke-dasharray:339;stroke-dashoffset:339;animation:ringDraw .8s ease-out .15s forwards;}
   .doneSeal .checkPath{stroke-dasharray:48;stroke-dashoffset:48;animation:checkDraw .45s ease-out .75s forwards;}
+  @keyframes gazPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.4);}60%{transform:translate(-50%,-50%) scale(1.1);}100%{opacity:1;transform:translate(-50%,-50%) scale(1);}}
+  .doneGaz{position:absolute;left:50%;top:50%;width:64px;height:64px;background:linear-gradient(135deg,#F4E2B6,#D9B86A 55%,#C8A14A);-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain;transform:translate(-50%,-50%);animation:gazPop .6s cubic-bezier(.34,1.56,.64,1) .35s both;}
   .doneSeal .ray{position:absolute;left:50%;top:50%;width:3px;height:16px;border-radius:3px;background:linear-gradient(#F4E2B6,rgba(244,226,182,0));transform-origin:center -34px;opacity:0;}
   @keyframes rayBurst{0%{opacity:0;transform:rotate(var(--rot)) translateY(8px) scaleY(.2);}40%{opacity:1;}100%{opacity:0;transform:rotate(var(--rot)) translateY(-10px) scaleY(1);}}
   .doneTitle{font-family:'Playfair Display',serif;font-weight:600;font-size:38px;line-height:1.15;color:#fff;letter-spacing:-0.6px;margin:0;}
@@ -221,6 +226,7 @@
           </div>
 
           <div id="newForm" style="display:none;flex-direction:column;gap:10px;overflow-y:auto;padding-right:4px;">
+            <button id="newBack" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;border:none;background:none;padding:2px 0;margin-bottom:2px;cursor:pointer;font-family:'DM Sans';font-weight:600;font-size:13px;color:rgba(255,255,255,0.7);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6s-6 4.419-6 6s6 6 6 6"/></svg>Back</button>
             <div style="font-family:'Playfair Display',serif;font-weight:500;font-size:18px;color:#fff;">A few details</div>
             <div style="font-family:'DM Sans';font-weight:400;font-size:12.5px;color:rgba(255,255,255,0.6);margin-bottom:4px;">All optional — capture only what they're happy to share.</div>
             <div class="nf"><input id="nName" type="text" placeholder="Name"/></div>
@@ -396,7 +402,19 @@
             <div id="vfList" style="display:flex;flex-direction:column;"></div>
             <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid #F1ECE2;"><span style="font-family:'DM Sans';font-weight:700;font-size:14px;color:#000;">Total Amount</span><span id="vfTotal" style="font-family:'Playfair Display',serif;font-weight:600;font-size:18px;color:#2b5198;">&#8377; 0</span></div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:12px;"><span class="bfLab">Verify with OTP*</span><div style="display:flex;gap:10px;align-items:center;"><input id="vfOtp" class="billField" maxlength="6" inputmode="numeric" placeholder="Enter OTP" oninput="this.value=this.value.replace(/[^0-9]/g,'')" style="flex:1;"/><button id="vfSend" style="height:50px;padding:0 20px;border:none;border-radius:12px;background:linear-gradient(90deg,#184ba9,#0640ab,#3d76e3);color:#fff;font-family:'DM Sans';font-weight:500;font-size:14px;cursor:pointer;white-space:nowrap;">Send OTP</button></div></div>
+          <div style="display:flex;flex-direction:column;gap:12px;"><span class="bfLab">Verify with OTP*</span>
+            <div id="otpStart" style="display:flex;flex-direction:column;gap:14px;">
+              <span style="font-family:'DM Sans';font-weight:400;font-size:14px;line-height:1.5;color:#796d62;">We&rsquo;ll send a 6-digit code to <span id="otpDest" style="color:#0A2A66;font-weight:600;">the customer&rsquo;s number</span> to confirm this redemption.</span>
+              <button id="vfSend" style="align-self:flex-start;height:48px;padding:0 26px;border:none;border-radius:12px;background:linear-gradient(90deg,#184ba9,#0640ab,#3d76e3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20l-4-9l-9-4z"/></svg>Send OTP</button>
+            </div>
+            <div id="otpEnter" style="display:none;flex-direction:column;gap:14px;">
+              <span style="font-family:'DM Sans';font-weight:400;font-size:14px;line-height:1.5;color:#796d62;">Enter the 6-digit code sent to <span id="otpDest2" style="color:#0A2A66;font-weight:600;"></span></span>
+              <div id="otpBoxes" style="display:flex;gap:12px;">
+                <input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;font-family:'DM Sans';font-size:13px;"><span style="color:#A99F92;">Didn&rsquo;t receive it?</span><span id="otpResend" style="color:#A99F92;font-weight:600;cursor:default;">Resend in 0:30</span></div>
+            </div>
+          </div>
           <div style="display:flex;flex-direction:column;gap:12px;"><span class="bfLab">Customer Signature*</span><div id="vfSign" class="sigBox"><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#A99F92;">Tap to capture signature</span></div></div>
           <div style="display:flex;align-items:center;gap:12px;"><span class="tenderChk" id="vfConsent"></span><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#2b5198;">I consent to the redemption of the above selected tenders*</span></div>
         </div>
@@ -414,8 +432,8 @@
             <div class="ringGlow"></div>
             <svg viewBox="0 0 128 128" fill="none">
               <circle class="ringPath" cx="64" cy="64" r="54" stroke="#E7CB8E" stroke-width="3" stroke-linecap="round"/>
-              <path class="checkPath" d="M44 66l13 13 28-30" stroke="#F4E2B6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+            <div class="doneGaz"></div>
             <div class="sealRays"></div>
           </div>
           <h1 class="doneTitle doneRise" style="animation-delay:.5s;">Details captured <span class="em">&#10024;</span></h1>
@@ -560,6 +578,11 @@
   function showCatalogue(){setCatChip();showView('viewCatalogue');}
   doneReturning=function(k){k.detailed=true;showProfile(k);};
   var _origNew=doneNew; doneNew=function(){var nm=(document.getElementById('nName').value||'').trim();var em=(document.getElementById('nEmail').value||'').trim();var bd=(document.getElementById('nBday').value||'').trim();CUR={name:nm||'Guest',tier:'New · Indriya Circle',points:'0',detailed:true,email:em,dob:bd};_origNew();};
+  // back out of the "A few details" panel
+  var _nb=document.getElementById('newBack'); if(_nb) _nb.onclick=function(){ showState('form'); };
+  // auto-format date fields: insert separators so day/month (and year) are distinct
+  function bindDate(id,segs,maxd){var e=document.getElementById(id);if(!e)return;e.addEventListener('input',function(){var d=e.value.replace(/\D/g,'').slice(0,maxd);var out='',i=0,si=0;while(i<d.length&&si<segs.length){var n=segs[si];out+=d.substr(i,n);i+=n;si++;if(i<d.length)out+=' / ';}e.value=out;});}
+  bindDate('nBday',[2,2],4); bindDate('nAnniv',[2,2],4); bindDate('bfDob',[2,2,4],8);
   var _origNum=doneNumberOnly; doneNumberOnly=function(){CUR={name:'Guest',tier:'Walk-in',points:'0',detailed:false};_origNum();};
   saveBtn.onclick=function(){if(saveBtn.classList.contains('disabled'))return;var k=KNOWN[phone.value];if(k){doneReturning(k);}else{showState('new');}};
   document.getElementById('skipBtn').onclick=function(){doneNumberOnly();};
@@ -577,12 +600,14 @@
   document.querySelectorAll('#prodgrid .heart').forEach(function(hh){hh.onclick=function(e){e.stopPropagation();hh.classList.toggle('on');var on=hh.classList.contains('on');hh.style.background=on?'#0A2A66':'rgba(255,255,255,0.88)';var s=hh.querySelector('svg');if(s)s.style.color=on?'#fff':'#0A2A66';};});
   var sb2=document.getElementById('scanBtn'); if(sb2) sb2.onclick=function(){toast('Point the camera at the barcode to scan the piece.');};
   var ib2=document.getElementById('imgBtn'); if(ib2) ib2.onclick=function(){toast('Snap or upload a photo to find similar pieces.');};
-  var sessStarted=false,sessSecs=0,sessIv=null;
+  var sessStarted=false,sessSecs=0,sessIv=null,sessEnded=false;
   function _pad(n){return (n<10?'0':'')+n;}
-  function renderClock(){var ts=_pad(Math.floor(sessSecs/60))+':'+_pad(sessSecs%60);document.querySelectorAll('.clkTime').forEach(function(e){e.textContent=ts;e.style.display=sessStarted?'inline':'none';});document.querySelectorAll('.clkDot').forEach(function(e){e.style.background=sessStarted?'#008838':'#C9BFB0';e.classList.toggle('live',sessStarted);});document.querySelectorAll('.clkState').forEach(function(e){e.textContent=sessStarted?'Active Session':'Session ready';});document.querySelectorAll('.clkLabel').forEach(function(e){e.style.color=sessStarted?'#008838':'#7C7268';});}
+  function renderClock(){var ts=_pad(Math.floor(sessSecs/60))+':'+_pad(sessSecs%60);document.querySelectorAll('.clkTime').forEach(function(e){e.textContent=ts;e.style.display=(sessStarted&&!sessEnded)?'inline':'none';});document.querySelectorAll('.clkDot').forEach(function(e){e.style.background=sessEnded?'#C8A14A':(sessStarted?'#008838':'#C9BFB0');e.classList.toggle('live',sessStarted&&!sessEnded);});document.querySelectorAll('.clkState').forEach(function(e){e.textContent=sessEnded?'Session ended':(sessStarted?'Active Session':'Session ready');});document.querySelectorAll('.clkLabel').forEach(function(e){e.style.color=(sessStarted&&!sessEnded)?'#008838':'#7C7268';});}
   function _tick(){sessSecs++;renderClock();}
-  function startSession(){if(sessStarted)return;sessStarted=true;renderClock();sessIv=setInterval(_tick,1000);}
-  function stopSession(){sessStarted=false;if(sessIv){clearInterval(sessIv);sessIv=null;}sessSecs=0;renderClock();}
+  function startSession(){if(sessStarted)return;sessEnded=false;sessStarted=true;renderClock();sessIv=setInterval(_tick,1000);}
+  function stopSession(){sessStarted=false;sessEnded=false;if(sessIv){clearInterval(sessIv);sessIv=null;}sessSecs=0;renderClock();}
+  function endSessionClock(){sessStarted=false;sessEnded=true;if(sessIv){clearInterval(sessIv);sessIv=null;}renderClock();}
+  window.__endSessionClock=endSessionClock;
   function makeClock(){var w=document.createElement('span');w.className='sessClock';w.style.cssText='display:flex;align-items:center;gap:8px;margin-right:4px;';w.innerHTML='<span class="clkDot" style="width:7px;height:7px;border-radius:50%;background:#C9BFB0;"></span><span class="clkLabel" style="font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;white-space:nowrap;display:inline-block;width:150px;">Session <span class="clkState">ready</span> &middot; <span class="clkTime">00:00</span></span>';return w;}
     renderClock();
   var _cv=document.getElementById('canvas'); if(_cv) _cv.addEventListener('click',function(e){ if(e.target.closest('.cat,.chip')) startSession(); }, true);
@@ -631,7 +656,7 @@
     document.querySelectorAll('.trayThumbs .traythumb').forEach(function(el){el.onclick=function(){var it=tray[+el.getAttribute('data-i')]; if(it) openPDP(it);};});
   }
   function ensureInTray(prod){ if(!tray.some(function(t){return t.name===prod.name;})){ tray.push(prod); renderTray(); } }
-  function addToTray(prod){ if(tray.some(function(t){return t.name===prod.name;})){toast('Already in the tray.');return false;} tray.push(prod); renderTray(); toast(prod.name+' added to tray.'); return true; }
+  function addToTray(prod){ if(tray.some(function(t){return t.name===prod.name;})){return false;} tray.push(prod); renderTray(); return true; }
   document.querySelectorAll('.prodc').forEach(function(c){
     var info=c.lastElementChild;
     var name=info.children[1].textContent, price=info.children[2].textContent, cat=c.getAttribute('data-cat'), img=c.querySelector('img').src;
@@ -667,24 +692,42 @@
   document.getElementById('estContinue').onclick=function(){ var act=['viewSession','viewProfile','viewCatalogue','viewPDP'].filter(function(v){var e=document.getElementById(v);return e&&getComputedStyle(e).display!=='none';})[0]||'viewCatalogue'; window.__billReturn=act; var known=!!(CUR&&CUR.detailed); var ph=document.getElementById('phone'); var nn=document.getElementById('bfNum'); if(nn) nn.value=known&&ph?(ph.value||''):''; var na=document.getElementById('bfName'); if(na) na.value=known&&CUR?(CUR.name||''):''; var nd=document.getElementById('bfDob'); if(nd) nd.value=known&&CUR&&CUR.dob?CUR.dob:''; var ne=document.getElementById('bfEmail'); if(ne) ne.value=known&&CUR&&CUR.email?CUR.email:''; document.querySelectorAll('#viewBilling .tenderChk.on').forEach(function(c){c.classList.remove('on');}); closeEstimate(); showView('viewBilling'); if(window.__billSync)window.__billSync(); };
   (function(){
     function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
-    function billSync(){ var okv=val('bfNum')&&val('bfName')&&val('bfAddr')&&document.querySelectorAll('#viewBilling .tenderChk.on').length>0; var pr=document.getElementById('billProceed'); if(pr){pr.style.opacity=okv?'1':'0.5';pr.style.pointerEvents=okv?'auto':'none';} }
+    function billSync(){ var okv=val('bfNum')&&val('bfName')&&val('bfAddr'); var pr=document.getElementById('billProceed'); if(pr){pr.style.opacity=okv?'1':'0.5';pr.style.pointerEvents=okv?'auto':'none';} }
     window.__billSync=billSync;
     var bk=document.getElementById('billBack'); if(bk) bk.onclick=function(){ showView(window.__billReturn||'viewCatalogue'); if(typeof openEstimate==='function'&&tray.length) openEstimate(); };
     document.querySelectorAll('#viewBilling .tenderChk').forEach(function(c){ c.onclick=function(){ c.classList.toggle('on'); billSync(); }; });
     ['bfNum','bfName','bfAddr','bfDob','bfEmail'].forEach(function(id){var e=document.getElementById(id); if(e) e.addEventListener('input',billSync);});
-    var pr=document.getElementById('billProceed'); if(pr) pr.onclick=function(){ var sel=[].slice.call(document.querySelectorAll('#viewBilling .tenderChk.on')); var total=0,html=''; sel.forEach(function(c){ var nm=c.getAttribute('data-tname'),disp=c.getAttribute('data-tdisp'),v=parseInt(c.getAttribute('data-tval'),10)||0; total+=v; html+='<div class="vfRow"><span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#796d62;">'+nm+'</span><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:14px;color:#2b5198;">'+disp+'</span></div>'; }); document.getElementById('vfList').innerHTML=html; document.getElementById('vfCount').textContent=sel.length+' item'+(sel.length===1?'':'s')+' selected'; document.getElementById('vfTotal').textContent=fmtMoney(total); document.getElementById('vfName').textContent=val('bfName')||'Customer'; document.getElementById('vfOtp').value=''; document.getElementById('vfConsent').classList.remove('on'); var sg=document.getElementById('vfSign'); sg.classList.remove('signed'); sg.innerHTML='<span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#A99F92;">Tap to capture signature</span>'; vfSync(); showView('viewVerify'); };
+    var pr=document.getElementById('billProceed'); if(pr) pr.onclick=function(){ var sel=[].slice.call(document.querySelectorAll('#viewBilling .tenderChk.on')); var total=0,html=''; sel.forEach(function(c){ var nm=c.getAttribute('data-tname'),disp=c.getAttribute('data-tdisp'),v=parseInt(c.getAttribute('data-tval'),10)||0; total+=v; html+='<div class="vfRow"><span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#796d62;">'+nm+'</span><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:14px;color:#2b5198;">'+disp+'</span></div>'; }); document.getElementById('vfList').innerHTML=html; document.getElementById('vfCount').textContent=sel.length+' item'+(sel.length===1?'':'s')+' selected'; document.getElementById('vfTotal').textContent=fmtMoney(total); document.getElementById('vfName').textContent=val('bfName')||'Customer'; var _n=val('bfNum'); var _mask='•••• '+(_n?_n.slice(-4):''); document.getElementById('otpDest').innerHTML=_mask; document.getElementById('otpDest2').innerHTML=_mask; if(window.__otpReset)window.__otpReset(); document.getElementById('vfConsent').classList.remove('on'); var sg=document.getElementById('vfSign'); sg.classList.remove('signed'); sg.innerHTML='<span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#A99F92;">Tap to capture signature</span>'; vfSync(); showView('viewVerify'); };
     // verify wiring
-    function vfSync(){ var okv=val('vfOtp').length>=4 && document.getElementById('vfSign').classList.contains('signed') && document.getElementById('vfConsent').classList.contains('on'); var r=document.getElementById('vfRedeem'); if(r){r.style.opacity=okv?'1':'0.5';r.style.pointerEvents=okv?'auto':'none';} }
+    var otpBoxes=[].slice.call(document.querySelectorAll('#otpBoxes .otpBox'));
+    function getOtp(){ return otpBoxes.map(function(b){return b.value;}).join(''); }
+    function vfSync(){ var okv=getOtp().length===6 && document.getElementById('vfSign').classList.contains('signed') && document.getElementById('vfConsent').classList.contains('on'); var r=document.getElementById('vfRedeem'); if(r){r.style.opacity=okv?'1':'0.5';r.style.pointerEvents=okv?'auto':'none';} }
     var vb=document.getElementById('vfBack'); if(vb) vb.onclick=function(){ showView('viewBilling'); };
     var ve=document.getElementById('vfEdit'); if(ve) ve.onclick=function(){ showView('viewBilling'); };
-    var vs=document.getElementById('vfSend'); if(vs) vs.onclick=function(){ var n=val('bfNum'); toast('OTP sent to \u2022\u2022\u2022 '+(n?n.slice(-4):'')); };
+    // segmented OTP entry: auto-advance, backspace, paste
+    otpBoxes.forEach(function(b,i){
+      b.addEventListener('input',function(){ b.value=b.value.replace(/[^0-9]/g,'').slice(0,1); b.classList.toggle('filled',!!b.value); if(b.value&&i<otpBoxes.length-1)otpBoxes[i+1].focus(); vfSync(); });
+      b.addEventListener('keydown',function(e){ if(e.key==='Backspace'&&!b.value&&i>0){otpBoxes[i-1].focus();} });
+      b.addEventListener('paste',function(e){ e.preventDefault(); var d=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/[^0-9]/g,'').slice(0,6); for(var j=0;j<otpBoxes.length;j++){otpBoxes[j].value=d[j]||'';otpBoxes[j].classList.toggle('filled',!!d[j]);} (otpBoxes[Math.min(d.length,5)]||b).focus(); vfSync(); });
+    });
+    var _otpIv=null;
+    function startResend(){ var el=document.getElementById('otpResend'); if(!el)return; clearInterval(_otpIv); var s=30; el.style.cursor='default'; el.style.color='#A99F92'; el.textContent='Resend in 0:'+(s<10?'0'+s:s); _otpIv=setInterval(function(){ s--; if(s<=0){ clearInterval(_otpIv); el.textContent='Resend OTP'; el.style.color='#2b5198'; el.style.cursor='pointer'; } else { el.textContent='Resend in 0:'+(s<10?'0'+s:s); } },1000); }
+    function sendOtp(){ var n=val('bfNum'); document.getElementById('otpStart').style.display='none'; var oe=document.getElementById('otpEnter'); oe.style.display='flex'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); toast('OTP sent to \u2022\u2022\u2022\u2022 '+(n?n.slice(-4):'')); }
+    window.__otpReset=function(){ clearInterval(_otpIv); document.getElementById('otpStart').style.display='flex'; document.getElementById('otpEnter').style.display='none'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); };
+    var vs=document.getElementById('vfSend'); if(vs) vs.onclick=sendOtp;
+    var rs=document.getElementById('otpResend'); if(rs) rs.onclick=function(){ if(rs.style.cursor==='pointer'){ otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); vfSync(); toast('A new OTP has been sent.'); } };
     var sg=document.getElementById('vfSign'); if(sg) sg.onclick=function(){ sg.classList.add('signed'); sg.innerHTML='<span style="font-family:Playfair Display,serif;font-style:italic;font-weight:500;font-size:26px;color:#1a1917;">'+(val('bfName')||'Signed')+'</span>'; vfSync(); };
     var vc=document.getElementById('vfConsent'); if(vc) vc.onclick=function(){ vc.classList.toggle('on'); vfSync(); };
-    var vo=document.getElementById('vfOtp'); if(vo) vo.addEventListener('input',vfSync);
     var vr=document.getElementById('vfRedeem'); if(vr) vr.onclick=function(){ showView('viewDone'); };
     var dh=document.getElementById('doneHome'); if(dh) dh.onclick=function(){ showView('viewHome'); };
     // ---- magic: build the sparkle field + radiating rays each time the screen opens ----
     window.__playDone=function(){
+      // the journey is complete — reflect that the session has ended in the app bar
+      if(typeof window.__endSessionClock==='function') window.__endSessionClock();
+      document.querySelectorAll('#viewDone .endSess').forEach(function(e){e.style.display='none';});
+      // paint the Indriya gazelle in gold (reuse the logo silhouette as a mask)
+      var gz=document.querySelector('#viewDone .doneGaz'); var src=(document.querySelector('#homeEmpty img')||{}).src;
+      if(gz&&src){ gz.style.webkitMaskImage='url('+src+')'; gz.style.maskImage='url('+src+')'; }
       var sp=document.getElementById('doneSparks'); if(!sp) return; sp.innerHTML='';
       var glyphs=['\u2726','\u2727','\u2728','\u2724','\u00b7'];
       function rnd(a,b){return a+(b-a)*((Math.sin((sp.childElementCount+1)*97.13+a*1.7+b*0.3)+1)/2);}
