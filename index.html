@@ -120,6 +120,36 @@
   .availDot{position:absolute;top:10px;left:10px;width:9px;height:9px;border-radius:50%;background:#008838;box-shadow:0 0 0 2px rgba(255,255,255,0.92);z-index:2;}
 
   #viewPDP{background:#FFFFFF;}
+
+  /* ---- Final celebratory "Details captured" screen ---- */
+  #doneStage{position:relative;flex:1;overflow:hidden;background:radial-gradient(120% 95% at 68% 26%,#11264F 0%,#0A1B3D 46%,#050F28 100%);}
+  #doneSparks{position:absolute;inset:0;pointer-events:none;z-index:1;}
+  .dSpark{position:absolute;color:#E7CB8E;opacity:0;will-change:transform,opacity;}
+  @keyframes dTwinkle{0%,100%{opacity:0;transform:scale(.4) rotate(0deg);}45%{opacity:.95;transform:scale(1) rotate(25deg);}}
+  @keyframes dFloat{0%{opacity:0;transform:translate(0,0) scale(.3);}12%{opacity:1;}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1);}}
+  .doneWrap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;}
+  @keyframes doneRise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .doneRise{animation:doneRise .7s cubic-bezier(.22,.61,.36,1) both;}
+  .doneSeal{position:relative;width:128px;height:128px;margin-bottom:30px;}
+  .doneSeal .ringGlow{position:absolute;inset:-22px;border-radius:50%;background:radial-gradient(circle,rgba(231,203,142,0.45),rgba(231,203,142,0) 68%);animation:sealGlow 2.6s ease-in-out infinite;}
+  @keyframes sealGlow{0%,100%{opacity:.5;transform:scale(.92);}50%{opacity:1;transform:scale(1.06);}}
+  .doneSeal svg{position:absolute;inset:0;width:128px;height:128px;}
+  @keyframes ringDraw{from{stroke-dashoffset:339;}to{stroke-dashoffset:0;}}
+  @keyframes checkDraw{from{stroke-dashoffset:48;}to{stroke-dashoffset:0;}}
+  @keyframes sealPop{0%{transform:scale(.4);opacity:0;}60%{transform:scale(1.08);}100%{transform:scale(1);opacity:1;}}
+  .doneSeal .sealCore{transform-origin:center;animation:sealPop .6s cubic-bezier(.34,1.56,.64,1) both;}
+  .doneSeal .ringPath{stroke-dasharray:339;stroke-dashoffset:339;animation:ringDraw .8s ease-out .15s forwards;}
+  .doneSeal .checkPath{stroke-dasharray:48;stroke-dashoffset:48;animation:checkDraw .45s ease-out .75s forwards;}
+  .doneSeal .ray{position:absolute;left:50%;top:50%;width:3px;height:16px;border-radius:3px;background:linear-gradient(#F4E2B6,rgba(244,226,182,0));transform-origin:center -34px;opacity:0;}
+  @keyframes rayBurst{0%{opacity:0;transform:rotate(var(--rot)) translateY(8px) scaleY(.2);}40%{opacity:1;}100%{opacity:0;transform:rotate(var(--rot)) translateY(-10px) scaleY(1);}}
+  .doneTitle{font-family:'Playfair Display',serif;font-weight:600;font-size:38px;line-height:1.15;color:#fff;letter-spacing:-0.6px;margin:0;}
+  .doneTitle .em{background:linear-gradient(90deg,#F4E2B6,#D9B86A,#F4E2B6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .doneSub{font-family:'DM Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:#C9D2E6;margin:0;max-width:460px;}
+  .doneBtn{height:48px;padding:0 30px;border-radius:12px;border:1px solid rgba(231,203,142,0.55);background:rgba(231,203,142,0.08);color:#F4E2B6;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;letter-spacing:.2px;cursor:pointer;backdrop-filter:blur(2px);transition:background .18s,border-color .18s;}
+  .doneDiv{display:flex;align-items:center;gap:12px;}
+  .doneDiv span.ln{width:96px;height:1px;background:linear-gradient(90deg,rgba(231,203,142,0),#C8A14A);}
+  .doneDiv span.ln.r{background:linear-gradient(90deg,#C8A14A,rgba(231,203,142,0));}
+  .doneDiv .dia{width:8px;height:8px;background:#E7CB8E;transform:rotate(45deg);box-shadow:0 0 10px rgba(231,203,142,0.8);}
 </style></head>
 <body><div id="fit">
   <div id="stage">
@@ -375,6 +405,26 @@
         <button id="vfRedeem" style="width:552px;max-width:100%;height:44px;border:none;border-radius:12px;background:linear-gradient(90deg,#184ba9,#0640ab,#3d76e3);color:#fff;font-family:'DM Sans';font-weight:500;font-size:14px;cursor:pointer;opacity:0.5;pointer-events:none;transition:opacity .2s;">Verify &amp; Redeem</button>
       </div>
     </div>
+    <div class="view" id="viewDone" style="display:none;">
+      <div class="bar"></div>
+      <div id="doneStage">
+        <div id="doneSparks"></div>
+        <div class="doneWrap">
+          <div class="doneSeal">
+            <div class="ringGlow"></div>
+            <svg viewBox="0 0 128 128" fill="none">
+              <circle class="ringPath" cx="64" cy="64" r="54" stroke="#E7CB8E" stroke-width="3" stroke-linecap="round"/>
+              <path class="checkPath" d="M44 66l13 13 28-30" stroke="#F4E2B6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="sealRays"></div>
+          </div>
+          <h1 class="doneTitle doneRise" style="animation-delay:.5s;">Details captured <span class="em">&#10024;</span></h1>
+          <div class="doneDiv doneRise" style="margin:20px 0 18px;animation-delay:.62s;"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+          <p class="doneSub doneRise" style="animation-delay:.72s;">Your redemption request is verified.<br/>Please proceed to the cash counter for payment.</p>
+          <button id="doneHome" class="doneBtn doneRise" style="margin-top:34px;animation-delay:.9s;">Back to Home</button>
+        </div>
+      </div>
+    </div>
     <div id="estDrawer" style="display:none;position:absolute;inset:0;z-index:40;">
   <div id="estBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.45);"></div>
   <div style="position:absolute;top:0;right:0;width:534px;height:800px;background:#fff;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(7,20,42,0.3);padding:24px;">
@@ -502,7 +552,7 @@
 
   // ---- view navigation + catalogue ----
   var CUR=null;
-  function showView(id){['viewHome','viewSession','viewProfile','viewCatalogue','viewPDP','viewBilling','viewVerify'].forEach(function(v){var e=document.getElementById(v);if(e)e.style.display=(v===id)?'flex':'none';});if(id==='viewHome'&&typeof renderHome==='function')renderHome();}
+  function showView(id){['viewHome','viewSession','viewProfile','viewCatalogue','viewPDP','viewBilling','viewVerify','viewDone'].forEach(function(v){var e=document.getElementById(v);if(e)e.style.display=(v===id)?'flex':'none';});if(id==='viewHome'&&typeof renderHome==='function')renderHome();if(id==='viewDone'&&typeof window.__playDone==='function')window.__playDone();}
   function renderHome(){var ong=document.getElementById('homeOngoing'),emp=document.getElementById('homeEmpty'),cnt=document.getElementById('homeCount'),snb=document.getElementById('startNewBtn');if(!ong)return;if(typeof sessStarted!=='undefined'&&sessStarted){var who=(sel&&sel.who)?sel.who:'Walk-in';var mins=sessSecs<60?'Just now':(Math.floor(sessSecs/60)+' min ago');var intent=(sel&&sel.cats&&sel.cats.length)?('Looking for '+sel.cats[0]):((sel&&sel.occ)?sel.occ:'Exploring');var nm=(CUR&&CUR.name&&CUR.name!=='Guest')?CUR.name:'Guest_001';ong.innerHTML='<div class="sessCard"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+nm+'</span><span style="color:#D9D0C2;">|</span><span class="ongoBadge">Ongoing Session</span></div><div style="display:flex;align-items:center;gap:8px;margin-top:8px;font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;"><span>'+who+'</span><span>&middot;</span><span>'+mins+'</span><span>&middot;</span><span style="color:#0A2A66;font-weight:600;">'+intent+'</span></div></div><button class="resumeBtn" id="resumeBtn">Resume Session <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>';ong.style.display='block';if(emp)emp.style.display='none';if(cnt)cnt.textContent=' (1)';if(snb)snb.classList.add('disabled');var rb=document.getElementById('resumeBtn');if(rb)rb.onclick=function(){showView('viewSession');};}else{ong.style.display='none';if(emp)emp.style.display='block';if(cnt)cnt.textContent='';if(snb)snb.classList.remove('disabled');}}
   function interestChips(){var a=[];sel.cats.forEach(function(c){a.push(c);});['occ','who','for','budget'].forEach(function(k){if(sel[k])a.push(sel[k]);});return a;}
   function setCatChip(){var nm=CUR&&CUR.name?CUR.name:'Guest';var tier=(CUR&&CUR.tier)?CUR.tier:'New guest';var pts=(CUR&&CUR.points&&CUR.points!=='0')?(CUR.points+' loyalty points'):'Loyalty starts today';var a=document.getElementById('ccName'),b=document.getElementById('ccTier'),c=document.getElementById('ccPts');if(a)a.textContent=nm;if(b)b.textContent=tier;if(c)c.textContent=pts;}
@@ -631,7 +681,33 @@
     var sg=document.getElementById('vfSign'); if(sg) sg.onclick=function(){ sg.classList.add('signed'); sg.innerHTML='<span style="font-family:Playfair Display,serif;font-style:italic;font-weight:500;font-size:26px;color:#1a1917;">'+(val('bfName')||'Signed')+'</span>'; vfSync(); };
     var vc=document.getElementById('vfConsent'); if(vc) vc.onclick=function(){ vc.classList.toggle('on'); vfSync(); };
     var vo=document.getElementById('vfOtp'); if(vo) vo.addEventListener('input',vfSync);
-    var vr=document.getElementById('vfRedeem'); if(vr) vr.onclick=function(){ toast('Redeemed successfully \u2713'); };
+    var vr=document.getElementById('vfRedeem'); if(vr) vr.onclick=function(){ showView('viewDone'); };
+    var dh=document.getElementById('doneHome'); if(dh) dh.onclick=function(){ showView('viewHome'); };
+    // ---- magic: build the sparkle field + radiating rays each time the screen opens ----
+    window.__playDone=function(){
+      var sp=document.getElementById('doneSparks'); if(!sp) return; sp.innerHTML='';
+      var glyphs=['\u2726','\u2727','\u2728','\u2724','\u00b7'];
+      function rnd(a,b){return a+(b-a)*((Math.sin((sp.childElementCount+1)*97.13+a*1.7+b*0.3)+1)/2);}
+      for(var i=0;i<46;i++){
+        var s=document.createElement('span'); s.className='dSpark';
+        var g=glyphs[i%glyphs.length];
+        s.textContent=g;
+        var size=6+rnd(0,18); var x=rnd(2,98); var y=rnd(4,94);
+        var twk=(i%3===0);
+        s.style.left=x+'%'; s.style.top=y+'%'; s.style.fontSize=size+'px';
+        var delay=(rnd(0,18)/10).toFixed(2); var dur=(1.6+rnd(0,22)/10).toFixed(2);
+        if(twk){ s.style.animation='dTwinkle '+dur+'s ease-in-out '+delay+'s infinite'; }
+        else {
+          var ang=rnd(0,628)/100; var dist=60+rnd(0,180);
+          s.style.setProperty('--dx',(Math.cos(ang)*dist).toFixed(0)+'px');
+          s.style.setProperty('--dy',(Math.sin(ang)*dist).toFixed(0)+'px');
+          s.style.left='50%'; s.style.top='42%';
+          s.style.animation='dFloat '+(1.4+rnd(0,16)/10).toFixed(2)+'s ease-out '+(rnd(0,6)/10).toFixed(2)+'s forwards';
+        }
+        sp.appendChild(s);
+      }
+      var rw=document.querySelector('#viewDone .sealRays'); if(rw){ rw.innerHTML=''; for(var r=0;r<12;r++){ var ry=document.createElement('span'); ry.className='ray'; var rot=r*30; ry.style.setProperty('--rot',rot+'deg'); ry.style.transform='rotate('+rot+'deg)'; ry.style.animation='rayBurst .9s ease-out '+(0.7+r*0.012).toFixed(2)+'s 1 forwards'; rw.appendChild(ry); } }
+    };
   })();
   var _showCat=showCatalogue; showCatalogue=function(){ _showCat(); var nm=CUR&&CUR.name?CUR.name:'Guest'; var t=(CUR&&CUR.tier)?CUR.tier:'New guest'; var pt=(CUR&&CUR.points&&CUR.points!=='0')?(CUR.points+' loyalty points'):'Loyalty starts today'; var a=document.getElementById('ccName2'),b=document.getElementById('ccTier2'),c=document.getElementById('ccPts2'); if(a)a.textContent=nm; if(b)b.textContent=t; if(c)c.textContent=pt; };
   var _fr=fullReset; fullReset=function(){ tray=[]; document.querySelectorAll('.addbtn.added').forEach(function(b){b.textContent='Add';b.classList.remove('added');}); var pa=document.getElementById('pdpAdd'); if(pa){pa.textContent='Add to selection';pa.style.background='#C8A14A';} renderTray(); _fr(); };
@@ -670,6 +746,7 @@
     applyBar(document.querySelector('#viewPDP .bar'), true, 'viewCatalogue');
     applyBar(document.querySelector('#viewBilling .bar'), false, '');
     applyBar(document.querySelector('#viewVerify .bar'), false, '');
+    applyBar(document.querySelector('#viewDone .bar'), false, '');
     document.querySelectorAll('.endSess').forEach(function(b){b.onclick=function(){fullReset();toast('Session ended.');};});
     document.querySelectorAll('.addGuest').forEach(function(b){b.onclick=openGuestModal;});
     document.querySelectorAll('.navback').forEach(function(b){b.onclick=function(){var t=b.getAttribute('data-bt'); showView(t==='__cat__'?catFrom:t);};});
