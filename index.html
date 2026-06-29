@@ -118,6 +118,15 @@
   .sessCard{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px;background:#fff;border:1px solid #ECE5DA;border-radius:14px;padding:18px 22px;}
   .ongoBadge{display:inline-flex;align-items:center;height:22px;padding:0 10px;background:rgba(200,161,74,0.14);border-radius:20px;font-family:'DM Sans';font-weight:600;font-size:12px;color:#B8902F;}
   .resumeBtn{height:42px;padding:0 18px;border:none;border-radius:10px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans';font-weight:500;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:7px;}
+  .doneBadge{display:inline-flex;align-items:center;height:22px;padding:0 10px;background:rgba(0,136,56,0.12);border-radius:20px;font-family:'DM Sans';font-weight:600;font-size:12px;color:#008838;}
+  .compTag{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 16px;border-radius:10px;background:rgba(0,136,56,0.07);border:1px solid rgba(0,136,56,0.22);font-family:'DM Sans';font-weight:600;font-size:13px;color:#008838;white-space:nowrap;}
+  .waChip{width:40px;height:40px;border-radius:50%;background:rgba(245,239,232,0.6);border:1px solid #ECD8BD;display:flex;align-items:center;justify-content:center;flex:none;}
+  .waField{display:flex;align-items:center;gap:10px;height:50px;padding:0 16px;border:1px solid #CED9F2;border-radius:12px;background:#fff;transition:border-color .15s,box-shadow .15s;}
+  .waField:focus-within{border-color:#C4D5FB;box-shadow:0 0 0 3px rgba(196,213,251,0.3);}
+  .waField input{border:none;outline:none;flex:1;min-width:0;font-family:'DM Sans';font-weight:500;font-size:14px;color:#1a1917;background:none;}
+  .waField input::placeholder{color:#A99F92;font-weight:400;}
+  @keyframes waPop{from{opacity:0;transform:translate(-50%,-46%) scale(.97);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
+  .waCard{animation:waPop .3s cubic-bezier(.22,.61,.36,1) both;}
   @keyframes searchShimmer{from{background-position:160% 0;}to{background-position:-160% 0;}}
   .shimmerOn::after{content:"";position:absolute;inset:0;border-radius:10px;padding:1.6px;background:linear-gradient(105deg,transparent 38%,rgba(200,161,74,0.95) 50%,transparent 62%);background-size:260% 100%;background-position:160% 0;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:searchShimmer 1.4s ease-out 0.35s 1 forwards;pointer-events:none;}
   .availDot{position:absolute;top:10px;left:10px;width:9px;height:9px;border-radius:50%;background:#008838;box-shadow:0 0 0 2px rgba(255,255,255,0.92);z-index:2;}
@@ -443,6 +452,32 @@
         </div>
       </div>
     </div>
+    <div id="waModal" style="display:none;position:absolute;inset:0;z-index:60;">
+      <div id="waBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.5);"></div>
+      <div class="waCard" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:560px;max-width:calc(100% - 48px);max-height:calc(100% - 56px);overflow-y:auto;background:#fff;border:1px solid #ECE5DA;border-radius:20px;box-shadow:0 32px 60px rgba(26,25,23,0.28);padding:34px 36px 30px;">
+        <button id="waClose" style="position:absolute;top:18px;right:18px;width:30px;height:30px;border:1px solid #C4D5FB;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#0A2A66" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;">
+          <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:24px;line-height:1.3;color:#003368;letter-spacing:-0.4px;">Liked the collection?<br/>Let&rsquo;s keep it saved for them.</div>
+          <div style="display:flex;align-items:center;gap:12px;margin:4px 0 2px;"><span style="width:96px;height:1px;background:linear-gradient(90deg,rgba(200,161,74,0),#D9C8A0);"></span><span style="width:7px;height:7px;background:#C8A14A;transform:rotate(45deg);"></span><span style="width:96px;height:1px;background:linear-gradient(90deg,#D9C8A0,rgba(200,161,74,0));"></span></div>
+          <div style="font-family:'DM Sans';font-weight:400;font-size:14px;line-height:1.55;color:#796d62;max-width:420px;">We&rsquo;ll send the pieces they loved straight to WhatsApp, so they can revisit their favourites anytime.</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin:22px 0 6px;">
+          <div style="display:flex;align-items:center;gap:10px;"><span class="waChip"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C8A14A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12v17l-6-4-6 4z"/></svg></span><div style="text-align:left;"><div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;">Collection saved</div><div style="font-family:'DM Sans';font-weight:400;font-size:12px;color:#796d62;">Favourite pieces in one place</div></div></div>
+          <span style="width:1px;height:42px;background:#ECE5DA;flex:none;"></span>
+          <div style="display:flex;align-items:center;gap:10px;"><span class="waChip"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#C8A14A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></span><div style="text-align:left;"><div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;">Easy access</div><div style="font-family:'DM Sans';font-weight:400;font-size:12px;color:#796d62;">Revisit on WhatsApp anytime</div></div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:18px;">
+          <div class="waField"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#A99F92" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg><input id="waName" type="text" placeholder="Customer name"/></div>
+          <div class="waField"><svg viewBox="0 0 24 24" width="20" height="20" fill="#25D366"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 2.1.55 4.07 1.6 5.83L2 22l4.4-1.15a9.9 9.9 0 0 0 5.64 1.74h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.8c2.16 0 4.18.84 5.71 2.37a8.06 8.06 0 0 1 2.37 5.74c0 4.46-3.63 8.09-8.09 8.09a8.1 8.1 0 0 1-4.12-1.13l-.3-.18-2.62.69.7-2.55-.19-.31a8.05 8.05 0 0 1-1.24-4.31c0-4.46 3.63-8.09 8.09-8.09zm-2.86 4.3c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.5.57.18 1.1.16 1.51.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.64-1.19-1.42-1.33-1.66-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46z"/></svg><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#796d62;white-space:nowrap;">+91</span><span style="width:1px;height:22px;background:#E6E0D6;"></span><input id="waNum" type="tel" inputmode="numeric" maxlength="10" placeholder="WhatsApp number" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:9px;margin-top:14px;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#A99F92" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span style="font-family:'DM Sans';font-weight:400;font-size:13px;line-height:1.5;color:#796d62;">Their details are safe with us and are only used to share this collection.</span></div>
+        <div style="display:flex;align-items:center;gap:11px;margin-top:12px;cursor:pointer;" id="waConsentRow"><span class="tenderChk" id="waConsent"></span><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#2b5198;">I agree to the Terms &amp; Conditions (opt-in)*</span></div>
+        <div style="display:flex;gap:12px;margin-top:24px;">
+          <button id="waLater" style="flex:1;height:46px;border:1px solid #1348AA;border-radius:12px;background:#fff;color:#003368;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;">Maybe later</button>
+          <button id="waSend" style="flex:1;height:46px;border:none;border-radius:12px;background:linear-gradient(90deg,#184ba9,#0640ab,#3d76e3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;opacity:0.5;pointer-events:none;transition:opacity .2s;">Yes, send the collection</button>
+        </div>
+      </div>
+    </div>
     <div id="estDrawer" style="display:none;position:absolute;inset:0;z-index:40;">
   <div id="estBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.45);"></div>
   <div style="position:absolute;top:0;right:0;width:534px;height:800px;background:#fff;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(7,20,42,0.3);padding:24px;">
@@ -564,18 +599,32 @@
   document.getElementById('skipBtn').onclick=function(){ doneNumberOnly(); };
   document.getElementById('newSaveBtn').onclick=function(){ doneNew(); };
   document.getElementById('newSkipBtn').onclick=function(){ doneNew(); };
-  function reset(){ sel={cats:[],occ:null,who:null,'for':null,budget:null}; phone.value=''; ['nName','nEmail','nBday','nAnniv'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';}); document.querySelectorAll('.cat.sel,.chip.sel').forEach(function(e){e.classList.remove('sel');}); document.getElementById('recog').classList.remove('show'); showState('form'); if(typeof stopSession==='function')stopSession(); var _ag=document.getElementById('addGuestBtn'); if(_ag)_ag.style.display='none'; saveBtn.classList.add('disabled'); saveLbl.textContent='Save and continue'; summary(); document.getElementById('canvas').scrollTop=0; }
+  function reset(){ window.__sessViewed=false; sel={cats:[],occ:null,who:null,'for':null,budget:null}; phone.value=''; ['nName','nEmail','nBday','nAnniv'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';}); document.querySelectorAll('.cat.sel,.chip.sel').forEach(function(e){e.classList.remove('sel');}); document.getElementById('recog').classList.remove('show'); showState('form'); if(typeof stopSession==='function')stopSession(); var _ag=document.getElementById('addGuestBtn'); if(_ag)_ag.style.display='none'; saveBtn.classList.add('disabled'); saveLbl.textContent='Save and continue'; summary(); document.getElementById('canvas').scrollTop=0; }
   document.getElementById('newBtn').onclick=function(){ reset(); toast('New session started.'); };
-  document.getElementById('endLink').onclick=function(){reset();toast('Session ended.');};
+  document.getElementById('endLink').onclick=function(){ if(window.__requestEndSession){window.__requestEndSession();} else {reset();toast('Session ended.');} };
 
   // ---- view navigation + catalogue ----
   var CUR=null;
   function showView(id){['viewHome','viewSession','viewProfile','viewCatalogue','viewPDP','viewBilling','viewVerify','viewDone'].forEach(function(v){var e=document.getElementById(v);if(e)e.style.display=(v===id)?'flex':'none';});if(id==='viewHome'&&typeof renderHome==='function')renderHome();if(id==='viewDone'&&typeof window.__playDone==='function')window.__playDone();}
-  function renderHome(){var ong=document.getElementById('homeOngoing'),emp=document.getElementById('homeEmpty'),cnt=document.getElementById('homeCount'),snb=document.getElementById('startNewBtn');if(!ong)return;if(typeof sessStarted!=='undefined'&&sessStarted){var who=(sel&&sel.who)?sel.who:'Walk-in';var mins=sessSecs<60?'Just now':(Math.floor(sessSecs/60)+' min ago');var intent=(sel&&sel.cats&&sel.cats.length)?('Looking for '+sel.cats[0]):((sel&&sel.occ)?sel.occ:'Exploring');var nm=(CUR&&CUR.name&&CUR.name!=='Guest')?CUR.name:'Guest_001';ong.innerHTML='<div class="sessCard"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+nm+'</span><span style="color:#D9D0C2;">|</span><span class="ongoBadge">Ongoing Session</span></div><div style="display:flex;align-items:center;gap:8px;margin-top:8px;font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;"><span>'+who+'</span><span>&middot;</span><span>'+mins+'</span><span>&middot;</span><span style="color:#0A2A66;font-weight:600;">'+intent+'</span></div></div><button class="resumeBtn" id="resumeBtn">Resume Session <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>';ong.style.display='block';if(emp)emp.style.display='none';if(cnt)cnt.textContent=' (1)';if(snb)snb.classList.add('disabled');var rb=document.getElementById('resumeBtn');if(rb)rb.onclick=function(){showView('viewSession');};}else{ong.style.display='none';if(emp)emp.style.display='block';if(cnt)cnt.textContent='';if(snb)snb.classList.remove('disabled');}}
+  var SESSIONS=[];
+  function metaLine(who,when,intent,pieces){var p=pieces?('<span>&middot;</span><span>'+pieces+' piece'+(pieces===1?'':'s')+'</span>'):'';return '<div style="display:flex;align-items:center;gap:8px;margin-top:8px;font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;flex-wrap:wrap;"><span>'+who+'</span><span>&middot;</span><span>'+when+'</span><span>&middot;</span><span style="color:#0A2A66;font-weight:600;">'+intent+'</span>'+p+'</div>';}
+  var CHECK_SVG='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  function renderHome(){var ong=document.getElementById('homeOngoing'),emp=document.getElementById('homeEmpty'),cnt=document.getElementById('homeCount'),snb=document.getElementById('startNewBtn');if(!ong)return;
+    var active=(typeof sessStarted!=='undefined'&&sessStarted&&!sessEnded);var cards='';
+    if(active){var who=(sel&&sel.who)?sel.who:'Walk-in';var mins=sessSecs<60?'Just now':(Math.floor(sessSecs/60)+' min ago');var intent=(sel&&sel.cats&&sel.cats.length)?('Looking for '+sel.cats[0]):((sel&&sel.occ)?sel.occ:'Exploring');var nm=(CUR&&CUR.name&&CUR.name!=='Guest')?CUR.name:'Guest_001';
+      cards+='<div class="sessCard" data-stype="ongoing"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+nm+'</span><span style="color:#D9D0C2;">|</span><span class="ongoBadge">Ongoing Session</span></div>'+metaLine(who,mins,intent,0)+'</div><button class="resumeBtn" id="resumeBtn">Resume Session <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>';}
+    SESSIONS.forEach(function(s){
+      cards+='<div class="sessCard" data-stype="completed" style="margin-top:14px;"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+s.name+'</span><span style="color:#D9D0C2;">|</span><span class="doneBadge">Completed</span></div>'+metaLine(s.who,s.when,s.intent,s.pieces)+'</div><span class="compTag">'+CHECK_SVG+s.tag+'</span></div>';});
+    var total=(active?1:0)+SESSIONS.length;
+    if(total>0){ong.innerHTML=cards;ong.style.display='block';if(emp)emp.style.display='none';if(cnt)cnt.textContent=' ('+total+')';}
+    else{ong.innerHTML='';ong.style.display='none';if(emp)emp.style.display='block';if(cnt)cnt.textContent='';}
+    if(snb)snb.classList.toggle('disabled',active);
+    var rb=document.getElementById('resumeBtn');if(rb)rb.onclick=function(){showView('viewSession');};
+    if(typeof window.__applyHomeTab==='function')window.__applyHomeTab();}
   function interestChips(){var a=[];sel.cats.forEach(function(c){a.push(c);});['occ','who','for','budget'].forEach(function(k){if(sel[k])a.push(sel[k]);});return a;}
   function setCatChip(){var nm=CUR&&CUR.name?CUR.name:'Guest';var tier=(CUR&&CUR.tier)?CUR.tier:'New guest';var pts=(CUR&&CUR.points&&CUR.points!=='0')?(CUR.points+' loyalty points'):'Loyalty starts today';var a=document.getElementById('ccName'),b=document.getElementById('ccTier'),c=document.getElementById('ccPts');if(a)a.textContent=nm;if(b)b.textContent=tier;if(c)c.textContent=pts;}
   function showProfile(k){CUR=k;var chips=interestChips();var box=document.getElementById('pfInterest');if(box){if(chips.length){box.style.display='block';var pc=document.getElementById('pfInterestChips');if(pc)pc.innerHTML=chips.map(function(x){return '<span class="pillsum">'+x+'</span>';}).join('');}else{box.style.display='none';}}showView('viewProfile');}
-  function showCatalogue(){setCatChip();showView('viewCatalogue');}
+  function showCatalogue(){window.__sessViewed=true;setCatChip();showView('viewCatalogue');}
   doneReturning=function(k){k.detailed=true;showProfile(k);};
   var _origNew=doneNew; doneNew=function(){var nm=(document.getElementById('nName').value||'').trim();var em=(document.getElementById('nEmail').value||'').trim();var bd=(document.getElementById('nBday').value||'').trim();CUR={name:nm||'Guest',tier:'New · Indriya Circle',points:'0',detailed:true,email:em,dob:bd};_origNew();};
   // back out of the "A few details" panel
@@ -591,7 +640,17 @@
   var pfb=document.getElementById('pfStart'); if(pfb) pfb.onclick=function(){showCatalogue();};
   var nb=document.getElementById('newBtn'); if(nb) nb.onclick=function(){showCatalogue();};
   function fullReset(){reset();CUR=null;showView('viewSession');}
-  ['endLink','endLinkP','endLinkC'].forEach(function(id){var e=document.getElementById(id);if(e)e.onclick=function(){fullReset();toast('Session ended.');};});
+  // snapshot the just-finished session so it appears on the home page
+  function sessSnapshot(tag){var nm=(CUR&&CUR.name&&CUR.name!=='Guest')?CUR.name:'Guest_001';var who=(sel&&sel.who)?sel.who:'Walk-in';var intent=(sel&&sel.cats&&sel.cats.length)?('Looking for '+sel.cats[0]):((sel&&sel.occ)?sel.occ:'Exploring');return {name:nm,who:who,intent:intent,pieces:(typeof tray!=='undefined'?tray.length:0),when:'Just now',tag:tag||'Completed'};}
+  function finalizeSession(tag){ if(window.__sessViewed){ SESSIONS.unshift(sessSnapshot(tag)); } }
+  window.__finalizeSession=finalizeSession;
+  // end a session and land the assistant on the home page (where completed sessions show)
+  function endToHome(tag,msg){ finalizeSession(tag); reset(); CUR=null; if(typeof updateChrome==='function')updateChrome(); showView('viewHome'); if(msg)toast(msg); }
+  window.__endToHome=endToHome;
+  // End Session from the bar: offer to save the collection on WhatsApp, but only if they actually viewed pieces
+  function requestEndSession(){ if(window.__sessViewed && window.__openWaModal){ window.__openWaModal(); } else { endToHome('Completed','Session ended.'); } }
+  window.__requestEndSession=requestEndSession;
+  ['endLink','endLinkP','endLinkC'].forEach(function(id){var e=document.getElementById(id);if(e)e.onclick=requestEndSession;});
   function filterCat(){var active=[].slice.call(document.querySelectorAll('.fcat.on')).map(function(e){return e.getAttribute('data-cat');});var q=(document.getElementById('catSearch').value||'').trim().toLowerCase();var shown=0;document.querySelectorAll('.prodc').forEach(function(c){var okc=active.length===0||active.indexOf(c.getAttribute('data-cat'))>-1;var okq=!q||c.getAttribute('data-name').indexOf(q)>-1;var show=okc&&okq;c.style.display=show?'flex':'none';if(show)shown++;});var cc=document.getElementById('catCount');if(cc)cc.textContent=shown+' piece'+(shown===1?'':'s');}
   document.querySelectorAll('.fcat').forEach(function(b){b.onclick=function(){b.classList.toggle('on');filterCat();};});
   document.querySelectorAll('.fpill').forEach(function(b){b.onclick=function(){b.classList.toggle('sel');};});
@@ -666,7 +725,7 @@
     info.appendChild(btn);
     c.addEventListener('click',function(){ openPDP(prod); });
   });
-  function openPDP(prod){ ensureInTray(prod); document.getElementById('pdpName').textContent='22KT Yellow Gold with Stone Neckwear - Choker.'; document.getElementById('pdpImg').src=prod.img; document.getElementById('pdpTotal').textContent=prod.price; var v=document.getElementById('viewPDP'); v.setAttribute('data-name',prod.name); v.setAttribute('data-price',prod.price); v.setAttribute('data-img',prod.img); v.setAttribute('data-cat',prod.cat); showView('viewPDP'); }
+  function openPDP(prod){ window.__sessViewed=true; ensureInTray(prod); document.getElementById('pdpName').textContent='22KT Yellow Gold with Stone Neckwear - Choker.'; document.getElementById('pdpImg').src=prod.img; document.getElementById('pdpTotal').textContent=prod.price; var v=document.getElementById('viewPDP'); v.setAttribute('data-name',prod.name); v.setAttribute('data-price',prod.price); v.setAttribute('data-img',prod.img); v.setAttribute('data-cat',prod.cat); showView('viewPDP'); }
   var _pdpBack=document.getElementById('pdpBack'); if(_pdpBack) _pdpBack.onclick=function(){ showView('viewCatalogue'); };
   var _pab=document.getElementById('pdpAdd'); if(_pab) _pab.onclick=function(){var v=document.getElementById('viewPDP'); var ok=addToTray({name:v.getAttribute('data-name'),price:v.getAttribute('data-price'),cat:v.getAttribute('data-cat'),img:v.getAttribute('data-img')}); if(ok){this.textContent='Added to selection \u2713';this.style.background='#E7CB8E';} };
   function estrow(l,v,strong){return '<div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-family:\'DM Sans\';font-weight:'+(strong?'600':'500')+';font-size:13px;color:'+(strong?'#1a1917':'#7C7268')+';">'+l+'</span><span style="font-family:\'DM Sans\';font-weight:'+(strong?'600':'500')+';font-size:13px;color:'+(strong?'#1a1917':'#3A4252')+';">'+v+'</span></div>';}
@@ -718,8 +777,19 @@
     var rs=document.getElementById('otpResend'); if(rs) rs.onclick=function(){ if(rs.style.cursor==='pointer'){ otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); vfSync(); toast('A new OTP has been sent.'); } };
     var sg=document.getElementById('vfSign'); if(sg) sg.onclick=function(){ sg.classList.add('signed'); sg.innerHTML='<span style="font-family:Playfair Display,serif;font-style:italic;font-weight:500;font-size:26px;color:#1a1917;">'+(val('bfName')||'Signed')+'</span>'; vfSync(); };
     var vc=document.getElementById('vfConsent'); if(vc) vc.onclick=function(){ vc.classList.toggle('on'); vfSync(); };
-    var vr=document.getElementById('vfRedeem'); if(vr) vr.onclick=function(){ showView('viewDone'); };
-    var dh=document.getElementById('doneHome'); if(dh) dh.onclick=function(){ showView('viewHome'); };
+    var vr=document.getElementById('vfRedeem'); if(vr) vr.onclick=function(){ if(window.__finalizeSession)window.__finalizeSession('Redeemed'); showView('viewDone'); };
+    var dh=document.getElementById('doneHome'); if(dh) dh.onclick=function(){ if(typeof reset==='function')reset(); CUR=null; if(typeof updateChrome==='function')updateChrome(); showView('viewHome'); };
+    // ---- WhatsApp save-collection modal ----
+    function waVal(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+    function waSync(){ var ok=waVal('waNum').length===10 && document.getElementById('waConsent').classList.contains('on'); var b=document.getElementById('waSend'); if(b){b.style.opacity=ok?'1':'0.5';b.style.pointerEvents=ok?'auto':'none';} }
+    window.__openWaModal=function(){ var nm=(CUR&&CUR.name&&CUR.name!=='Guest')?CUR.name:''; var ph=(document.getElementById('phone')||{}).value||''; var wa=document.getElementById('waName'); if(wa)wa.value=nm; var wn=document.getElementById('waNum'); if(wn)wn.value=(CUR&&CUR.detailed&&ph)?ph:''; var wc=document.getElementById('waConsent'); if(wc)wc.classList.remove('on'); waSync(); document.getElementById('waModal').style.display='block'; };
+    function closeWa(){ document.getElementById('waModal').style.display='none'; }
+    var waN=document.getElementById('waNum'); if(waN) waN.addEventListener('input',waSync);
+    var waCr=document.getElementById('waConsentRow'); if(waCr) waCr.onclick=function(){ document.getElementById('waConsent').classList.toggle('on'); waSync(); };
+    var waCl=document.getElementById('waClose'); if(waCl) waCl.onclick=closeWa;
+    var waBd=document.getElementById('waBackdrop'); if(waBd) waBd.onclick=closeWa;
+    var waL=document.getElementById('waLater'); if(waL) waL.onclick=function(){ closeWa(); if(window.__endToHome)window.__endToHome('Completed','Session ended.'); };
+    var waS=document.getElementById('waSend'); if(waS) waS.onclick=function(){ var n=waVal('waNum'); closeWa(); if(window.__endToHome)window.__endToHome('Saved to WhatsApp','Collection sent to •••• '+n.slice(-4)+' on WhatsApp ✓'); };
     // ---- magic: build the sparkle field + radiating rays each time the screen opens ----
     window.__playDone=function(){
       // the journey is complete — reflect that the session has ended in the app bar
@@ -790,7 +860,7 @@
     applyBar(document.querySelector('#viewBilling .bar'), false, '');
     applyBar(document.querySelector('#viewVerify .bar'), false, '');
     applyBar(document.querySelector('#viewDone .bar'), false, '');
-    document.querySelectorAll('.endSess').forEach(function(b){b.onclick=function(){fullReset();toast('Session ended.');};});
+    document.querySelectorAll('.endSess').forEach(function(b){b.onclick=function(){ if(window.__requestEndSession){window.__requestEndSession();} else {fullReset();toast('Session ended.');} };});
     document.querySelectorAll('.addGuest').forEach(function(b){b.onclick=openGuestModal;});
     document.querySelectorAll('.navback').forEach(function(b){b.onclick=function(){var t=b.getAttribute('data-bt'); showView(t==='__cat__'?catFrom:t);};});
     document.querySelectorAll('.pageBack').forEach(function(b){b.onclick=function(){var t=b.getAttribute('data-bt'); showView(t==='__cat__'?catFrom:t);};});
@@ -803,7 +873,8 @@
       _hb.innerHTML='<div style="display:flex;align-items:center;gap:16px;"><button class="homeMenu" style="border:none;background:none;padding:0;display:flex;align-items:center;cursor:pointer;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A2A66" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><img src="'+WORDSRC+'" style="height:30px;"/></div>'+
         '<div style="display:flex;align-items:center;gap:14px;"><button class="rateBtn" style="border:none;background:none;padding:0;cursor:pointer;display:flex;align-items:center;"><img src="'+GOLDSRC+'" style="width:34px;height:34px;"/></button><img src="'+ABJSRC+'" style="height:34px;"/></div>'; }
     var _snb=document.getElementById('startNewBtn'); if(_snb) _snb.onclick=function(){ CUR=null; if(typeof reset==='function')reset(); showView('viewSession'); if(typeof startSession==='function')startSession(); };
-    document.querySelectorAll('#viewHome .homeTab').forEach(function(t){ t.onclick=function(){ document.querySelectorAll('#viewHome .homeTab').forEach(function(x){x.classList.remove('on');}); t.classList.add('on'); }; });
+    window.__applyHomeTab=function(){ var act=document.querySelector('#viewHome .homeTab.on'); var tab=act?act.getAttribute('data-tab'):'all'; document.querySelectorAll('#homeOngoing .sessCard').forEach(function(c){ var ty=c.getAttribute('data-stype'); c.style.display=((tab==='all')||(tab===ty))?'flex':'none'; }); };
+    document.querySelectorAll('#viewHome .homeTab').forEach(function(t){ t.onclick=function(){ document.querySelectorAll('#viewHome .homeTab').forEach(function(x){x.classList.remove('on');}); t.classList.add('on'); window.__applyHomeTab(); }; });
     var _sc3=showCatalogue,_shim=false; showCatalogue=function(){ _sc3(); if(!_shim){_shim=true; var sb=document.getElementById('catSearchBox'); if(sb)sb.classList.add('shimmerOn');} };
   })();
   function setChips(){var nm=(CUR&&CUR.name)?CUR.name:'Guest';var t=(CUR&&CUR.tier)?CUR.tier:'New guest';var pt=(CUR&&CUR.points&&CUR.points!=='0')?(CUR.points+' loyalty points'):'Loyalty starts today';document.querySelectorAll('.chipName').forEach(function(e){e.textContent=nm;});document.querySelectorAll('.chipTier').forEach(function(e){e.textContent=t;});document.querySelectorAll('.chipPts').forEach(function(e){e.textContent=pt;});}
