@@ -88,6 +88,49 @@
   .clkState{display:inline-block;min-width:46px;}
 
   #viewPDP{background:#FCFAF7;}
+
+  .tenderChk{width:22px;height:22px;border:1.5px solid #C4D5FB;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:background .15s,border-color .15s;}
+  .tenderChk.on{background:#032560;border-color:#032560;}
+  .tenderChk.on::after{content:"\2713";color:#fff;font-size:13px;line-height:1;}
+  .bfLab{font-family:'DM Sans';font-weight:600;font-size:14px;color:#000;}
+  .billField{width:100%;height:50px;padding:0 14px;background:#fff;border:1px solid #CCC;border-radius:12px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#1a1917;outline:none;transition:border-color .15s,box-shadow .15s;}
+  .billField::placeholder{color:#A99F92;}
+  .billField:focus{border-color:#C4D5FB;box-shadow:0 0 0 3px rgba(196,213,251,0.35);}
+  textarea.billField{height:auto;min-height:78px;padding:11px 14px;resize:none;line-height:20px;}
+  #vfList .vfRow{display:flex;align-items:center;justify-content:space-between;padding:6px 0;}
+  .otpBox{width:54px;height:60px;border:1px solid #E2DAC9;border-radius:12px;background:#fff;text-align:center;font-family:'DM Sans',sans-serif;font-weight:600;font-size:22px;color:#0A2A66;outline:none;transition:border-color .15s,box-shadow .15s;}
+  .otpBox:focus{border-color:#C4D5FB;box-shadow:0 0 0 3px rgba(196,213,251,0.35);}
+  .otpBox.filled{border-color:#C4D5FB;}
+  .sigBox{width:100%;height:100px;border:1px dashed #A89B93;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:#FCFBF9;transition:border-color .15s;}
+  .sigBox.signed{border-style:solid;border-color:#C4D5FB;background:#fff;}
+  #doneStage{position:relative;flex:1;overflow:hidden;background:radial-gradient(120% 95% at 68% 26%,#11264F 0%,#0A1B3D 46%,#050F28 100%);}
+  #doneSparks{position:absolute;inset:0;pointer-events:none;z-index:1;}
+  .dSpark{position:absolute;color:#E7CB8E;opacity:0;will-change:transform,opacity;}
+  @keyframes dTwinkle{0%,100%{opacity:0;transform:scale(.4) rotate(0deg);}45%{opacity:.95;transform:scale(1) rotate(25deg);}}
+  @keyframes dFloat{0%{opacity:0;transform:translate(0,0) scale(.3);}12%{opacity:1;}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1);}}
+  .doneWrap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;}
+  @keyframes doneRise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .doneRise{animation:doneRise .7s cubic-bezier(.22,.61,.36,1) both;}
+  .doneSeal{position:relative;width:128px;height:128px;margin-bottom:30px;}
+  .doneSeal .ringGlow{position:absolute;inset:-22px;border-radius:50%;background:radial-gradient(circle,rgba(231,203,142,0.45),rgba(231,203,142,0) 68%);animation:sealGlow 2.6s ease-in-out infinite;}
+  @keyframes sealGlow{0%,100%{opacity:.5;transform:scale(.92);}50%{opacity:1;transform:scale(1.06);}}
+  .doneSeal svg{position:absolute;inset:0;width:128px;height:128px;}
+  @keyframes ringDraw{from{stroke-dashoffset:339;}to{stroke-dashoffset:0;}}
+  @keyframes checkDraw{from{stroke-dashoffset:48;}to{stroke-dashoffset:0;}}
+  @keyframes sealPop{0%{transform:scale(.4);opacity:0;}60%{transform:scale(1.08);}100%{transform:scale(1);opacity:1;}}
+  .doneSeal .sealCore{transform-origin:center;animation:sealPop .6s cubic-bezier(.34,1.56,.64,1) both;}
+  .doneSeal .ringPath{stroke-dasharray:339;stroke-dashoffset:339;animation:ringDraw .8s ease-out .15s forwards;}
+  .doneSeal .checkPath{stroke-dasharray:48;stroke-dashoffset:48;animation:checkDraw .45s ease-out .75s forwards;}
+  .doneSeal .ray{position:absolute;left:50%;top:50%;width:3px;height:16px;border-radius:3px;background:linear-gradient(#F4E2B6,rgba(244,226,182,0));transform-origin:center -34px;opacity:0;}
+  @keyframes rayBurst{0%{opacity:0;transform:rotate(var(--rot)) translateY(8px) scaleY(.2);}40%{opacity:1;}100%{opacity:0;transform:rotate(var(--rot)) translateY(-10px) scaleY(1);}}
+  .doneTitle{font-family:'Playfair Display',serif;font-weight:600;font-size:38px;line-height:1.15;color:#fff;letter-spacing:-0.6px;margin:0;}
+  .doneTitle .em{background:linear-gradient(90deg,#F4E2B6,#D9B86A,#F4E2B6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .doneSub{font-family:'DM Sans',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:#C9D2E6;margin:0;max-width:460px;}
+  .doneBtn{height:48px;padding:0 30px;border-radius:12px;border:1px solid rgba(231,203,142,0.55);background:rgba(231,203,142,0.08);color:#F4E2B6;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;letter-spacing:.2px;cursor:pointer;backdrop-filter:blur(2px);transition:background .18s,border-color .18s;}
+  .doneDiv{display:flex;align-items:center;gap:12px;}
+  .doneDiv span.ln{width:96px;height:1px;background:linear-gradient(90deg,rgba(231,203,142,0),#C8A14A);}
+  .doneDiv span.ln.r{background:linear-gradient(90deg,#C8A14A,rgba(231,203,142,0));}
+  .doneDiv .dia{width:8px;height:8px;background:#E7CB8E;transform:rotate(45deg);box-shadow:0 0 10px rgba(231,203,142,0.8);}
 </style></head>
 <body><div id="fit">
   <div id="stage">
@@ -322,6 +365,80 @@
   </div>
   <div class="traybar" style="position:absolute;left:0;right:0;bottom:0;height:100px;background:#fff;border-top:1px solid #ECE5DA;box-shadow:0 -4px 16px rgba(10,27,51,0.06);display:flex;align-items:center;gap:16px;padding:0 28px;z-index:20;"><div style="flex:none;width:200px;display:flex;flex-direction:column;gap:3px;"><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Items</span><span class="tsv tItems">0</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Discount</span><span class="tsv tDisc">—</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Amount</span><span class="tsv tAmt" style="font-weight:700;">₹0</span></div></div><span style="width:1px;height:50px;background:#ECE5DA;flex:none;"></span><button class="trayArrow trayPrev" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 6s-6 4.419-6 6s6 6 6 6"/></svg></button><div class="trayThumbs" style="flex:0 1 auto;display:flex;align-items:center;gap:12px;overflow-x:auto;min-width:0;max-width:560px;padding:10px 12px 8px 8px;"><span class="trayEmpty" style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#A99F92;font-style:italic;">Add pieces to build the estimate.</span></div><button class="trayArrow trayNext" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button><button class="trayAddMore" style="flex:none;height:44px;padding:0 16px;border:1px solid #D9E0EF;border-radius:11px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1;">+ Add More</button><button class="trayClear" style="display:none;flex:none;height:44px;padding:0 16px;border:1px solid #E2DAC9;border-radius:11px;background:#fff;color:#6E6358;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;align-items:center;justify-content:center;line-height:1;">Clear All</button><button class="estBtn disabled" style="flex:none;height:50px;padding:0 22px;border:none;border-radius:12px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:9px;opacity:0.4;pointer-events:none;">View product estimate <svg viewBox="0 0 24 24" width="17" height="17" fill="none" style="display:inline-block;vertical-align:middle;color:#fff;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>
 </div>
+<div class="view" id="viewBilling" style="display:none;">
+      <div class="bar"></div>
+      <div style="flex:1;overflow-y:auto;padding:30px 24px 104px;">
+        <div style="width:680px;max-width:100%;margin:0 auto;display:flex;flex-direction:column;gap:20px;">
+          <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;"><div style="font-family:'Playfair Display',serif;font-weight:600;font-size:24px;color:#1a1917;letter-spacing:-0.4px;text-align:center;">Update Billing Details</div><div style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#796d62;text-align:center;">This helps us serve customer better &amp; speed up your checkout</div><div style="display:flex;align-items:center;gap:10px;margin-top:6px;"><span style="width:120px;height:1px;background:linear-gradient(90deg,rgba(200,161,74,0),#D9C8A0);"></span><span style="width:7px;height:7px;background:#C8A14A;transform:rotate(45deg);"></span><span style="width:120px;height:1px;background:linear-gradient(90deg,#D9C8A0,rgba(200,161,74,0));"></span></div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Customer&rsquo;s Number*</span><div class="billField" style="display:flex;align-items:center;gap:10px;"><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#796d62;">+91</span><span style="font-weight:300;font-size:18px;color:#CCC;">|</span><input id="bfNum" maxlength="10" inputmode="numeric" placeholder="Mobile number" oninput="this.value=this.value.replace(/[^0-9]/g,'')" style="flex:1;border:none;outline:none;background:transparent;font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;"/></div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Customer&rsquo;s Name*</span><input id="bfName" class="billField" placeholder="Full name"/></div>
+          <div style="display:flex;gap:16px;width:100%;">
+            <div style="flex:1;"><div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Date of Birth</span><input id="bfDob" class="billField" placeholder="DD / MM / YYYY"/></div></div>
+            <div style="flex:1;"><div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Email</span><input id="bfEmail" class="billField" placeholder="name@email.com"/></div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Billing Address*</span><textarea id="bfAddr" class="billField" placeholder="Flat / Street / City / State / PIN &mdash; the bill will be generated on this address"></textarea></div>
+          <div id="billTenders" style="border-top:1px solid #ECE5DA;margin-top:10px;padding-top:22px;display:flex;flex-direction:column;gap:18px;"><div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'DM Sans';font-weight:700;font-size:15px;color:#1a1917;">Available Tenders</span><span style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#796d62;">Points, schemes and advances this customer can redeem</span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;"><span style="display:flex;align-items:center;gap:10px;"><span class="tenderChk" data-tname="Loyalty Points" data-tdisp="12,400 Pts" data-tval="12400"></span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#000;">1. Loyalty Points</span></span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#2b5198;white-space:nowrap;">12,400 Pts</span></div>
+          <div style="display:flex;flex-direction:column;gap:8px;"><div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#000;">2. Savings Schemes</div><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;"><span style="display:flex;align-items:center;gap:10px;"><span class="tenderChk" data-tname="Gold Harvest Scheme (matured)" data-tdisp="&#8377; 15,000" data-tval="15000"></span><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#796d62;">Gold Harvest Scheme (matured)</span></span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#2b5198;white-space:nowrap;">&#8377; 15,000</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;"><span style="display:flex;align-items:center;gap:10px;"><span class="tenderChk" data-tname="Flexi Gold Plan" data-tdisp="&#8377; 10,000" data-tval="10000"></span><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#796d62;">Flexi Gold Plan</span></span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#2b5198;white-space:nowrap;">&#8377; 10,000</span></div></div>
+          <div style="display:flex;flex-direction:column;gap:8px;"><div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#000;">3. Advance Paid</div><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;"><span style="display:flex;align-items:center;gap:10px;"><span class="tenderChk" data-tname="Advance &middot; Jun 2025" data-tdisp="&#8377; 20,000" data-tval="20000"></span><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#796d62;">Advance &middot; Jun 2025</span></span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#2b5198;white-space:nowrap;">&#8377; 20,000</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;"><span style="display:flex;align-items:center;gap:10px;"><span class="tenderChk" data-tname="Advance &middot; Mar 2025" data-tdisp="&#8377; 5,000" data-tval="5000"></span><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#796d62;">Advance &middot; Mar 2025</span></span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#2b5198;white-space:nowrap;">&#8377; 5,000</span></div></div></div><div id="billNoTenders" style="display:none;border:1px dashed #E2DAC9;border-radius:12px;padding:16px;background:#FCFBF9;"><div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;margin-bottom:4px;">No tenders to redeem</div><div style="font-family:'DM Sans';font-weight:400;font-size:13px;line-height:1.5;color:#796d62;">This customer has no loyalty points, schemes or advances on record. You can still capture their billing details and continue to payment.</div></div>
+        </div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;box-shadow:0 -1px 6px rgba(26,25,23,0.12);padding:24px;display:flex;justify-content:center;">
+        <button id="billProceed" style="width:552px;max-width:100%;height:44px;border:none;border-radius:12px;background:linear-gradient(90deg,#184ba9,#0640ab,#3d76e3);color:#fff;font-family:'DM Sans';font-weight:500;font-size:14px;cursor:pointer;opacity:0.5;pointer-events:none;transition:opacity .2s;">Proceed to Verify</button>
+      </div>
+    </div>
+    <div class="view" id="viewVerify" style="display:none;">
+      <div class="bar"></div>
+      <div style="flex:1;overflow-y:auto;padding:30px 24px 104px;">
+        <div style="width:680px;max-width:100%;margin:0 auto;display:flex;flex-direction:column;gap:20px;">
+          <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;"><div style="font-family:'Playfair Display',serif;font-weight:600;font-size:24px;color:#1a1917;letter-spacing:-0.4px;text-align:center;">Verify &amp; Redeem</div><div style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#796d62;text-align:center;">Confirm the redemption, verify with OTP and capture the signature.</div><div style="display:flex;align-items:center;gap:10px;margin-top:6px;"><span style="width:120px;height:1px;background:linear-gradient(90deg,rgba(200,161,74,0),#D9C8A0);"></span><span style="width:7px;height:7px;background:#C8A14A;transform:rotate(45deg);"></span><span style="width:120px;height:1px;background:linear-gradient(90deg,#D9C8A0,rgba(200,161,74,0));"></span></div></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;"><span id="vfName" style="font-family:'DM Sans';font-weight:600;font-size:16px;color:#000;">Customer</span><span id="vfEdit" style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#2b5198;cursor:pointer;">Edit</span></div>
+          <div style="background:#fff;border:1px solid #ECE5DA;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#000;">Selected Tenders</span><span id="vfCount" style="font-family:'DM Sans';font-weight:400;font-size:14px;color:#796d62;">0 items selected</span></div>
+            <div id="vfList" style="display:flex;flex-direction:column;"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid #F1ECE2;"><span style="font-family:'DM Sans';font-weight:700;font-size:14px;color:#000;">Total Amount</span><span id="vfTotal" style="font-family:'Playfair Display',serif;font-weight:600;font-size:18px;color:#2b5198;">&#8377; 0</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;"><span class="bfLab">Verify with OTP*</span>
+            <div id="otpStart" style="display:flex;flex-direction:column;gap:14px;">
+              <span style="font-family:'DM Sans';font-weight:400;font-size:14px;line-height:1.5;color:#796d62;">We&rsquo;ll send a 6-digit code to <span id="otpDest" style="color:#0A2A66;font-weight:600;">the customer&rsquo;s number</span> to confirm this redemption.</span>
+              <button id="vfSend" style="align-self:flex-start;height:48px;padding:0 26px;border:none;border-radius:12px;background:linear-gradient(90deg,#184ba9,#0640ab,#3d76e3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20l-4-9l-9-4z"/></svg>Send OTP</button>
+            </div>
+            <div id="otpEnter" style="display:none;flex-direction:column;gap:14px;">
+              <span style="font-family:'DM Sans';font-weight:400;font-size:14px;line-height:1.5;color:#796d62;">Enter the 6-digit code sent to <span id="otpDest2" style="color:#0A2A66;font-weight:600;"></span></span>
+              <div id="otpBoxes" style="display:flex;gap:12px;">
+                <input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;font-family:'DM Sans';font-size:13px;"><span style="color:#A99F92;">Didn&rsquo;t receive it?</span><span id="otpResend" style="color:#A99F92;font-weight:600;cursor:default;">Resend in 0:30</span></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;"><span class="bfLab">Customer Signature*</span><div id="vfSign" class="sigBox"><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#A99F92;">Tap to capture signature</span></div></div>
+          <div style="display:flex;align-items:center;gap:12px;"><span class="tenderChk" id="vfConsent"></span><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#2b5198;">I consent to the redemption of the above selected tenders*</span></div>
+        </div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;box-shadow:0 -1px 6px rgba(26,25,23,0.12);padding:24px;display:flex;justify-content:center;">
+        <button id="vfRedeem" style="width:552px;max-width:100%;height:44px;border:none;border-radius:12px;background:linear-gradient(90deg,#184ba9,#0640ab,#3d76e3);color:#fff;font-family:'DM Sans';font-weight:500;font-size:14px;cursor:pointer;opacity:0.5;pointer-events:none;transition:opacity .2s;">Verify &amp; Redeem</button>
+      </div>
+    </div>
+    <div class="view" id="viewDone" style="display:none;">
+      <div class="bar"></div>
+      <div id="doneStage">
+        <div id="doneSparks"></div>
+        <div class="doneWrap">
+          <div class="doneSeal">
+            <div class="ringGlow"></div>
+            <svg viewBox="0 0 128 128" fill="none">
+              <circle class="ringPath" cx="64" cy="64" r="54" stroke="#E7CB8E" stroke-width="3" stroke-linecap="round"/><path class="checkPath" d="M44 65l13 14 27-31" stroke="#E7CB8E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            
+            <div class="sealRays"></div>
+          </div>
+          <h1 class="doneTitle doneRise" style="animation-delay:.5s;">Details captured <span class="em">&#10024;</span></h1>
+          <div class="doneDiv doneRise" style="margin:20px 0 18px;animation-delay:.62s;"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+          <p class="doneSub doneRise" style="animation-delay:.72s;">Your redemption request is verified.<br/>Please proceed to the cash counter for payment.</p>
+          <button id="doneHome" class="doneBtn doneRise" style="margin-top:34px;animation-delay:.9s;">Back to Home</button>
+        </div>
+      </div>
+    </div>
 <div id="estDrawer" style="display:none;position:absolute;inset:0;z-index:40;">
   <div id="estBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.45);"></div>
   <div style="position:absolute;top:0;right:0;width:534px;height:800px;background:#fff;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(7,20,42,0.3);padding:24px;">
@@ -447,7 +564,7 @@
 
   // ---- view navigation + catalogue ----
   var CUR=null;
-  function showView(id){['viewSession','viewProfile','viewSearch','viewCatalogue','viewPDP'].forEach(function(v){var e=document.getElementById(v);if(e)e.style.display=(v===id)?'flex':'none';});}
+  function showView(id){['viewSession','viewProfile','viewSearch','viewCatalogue','viewPDP','viewBilling','viewVerify','viewDone'].forEach(function(v){var e=document.getElementById(v);if(e)e.style.display=(v===id)?'flex':'none';});if(id==='viewDone'&&typeof window.__playDone==='function')window.__playDone();}
   function interestChips(){var a=[];sel.cats.forEach(function(c){a.push(c);});['occ','who','for','budget'].forEach(function(k){if(sel[k])a.push(sel[k]);});return a;}
   function setCatChip(){var nm=CUR&&CUR.name?CUR.name:'Guest';var tier=(CUR&&CUR.tier)?CUR.tier:'New guest';var pts=(CUR&&CUR.points&&CUR.points!=='0')?(CUR.points+' loyalty points'):'Loyalty starts today';var a=document.getElementById('ccName'),b=document.getElementById('ccTier'),c=document.getElementById('ccPts');if(a)a.textContent=nm;if(b)b.textContent=tier;if(c)c.textContent=pts;}
   function showProfile(k){CUR=k;var chips=interestChips();var box=document.getElementById('pfInterest');if(chips.length){box.style.display='block';document.getElementById('pfInterestChips').innerHTML=chips.map(function(x){return '<span class="pillsum">'+x+'</span>';}).join('');}else{box.style.display='none';}showView('viewProfile');}
@@ -557,7 +674,65 @@
   document.querySelectorAll('#viewCatalogue .estBtn').forEach(function(b){ if(b.firstChild) b.firstChild.nodeValue='View product description page '; b.onclick=function(){ if(tray.length) openPDP(tray[tray.length-1]); }; });
   document.getElementById('estClose').onclick=closeEstimate;
   document.getElementById('estBackdrop').onclick=closeEstimate;
-  document.getElementById('estContinue').onclick=function(){ toast('Billing — coming soon.'); };
+  document.getElementById('estContinue').onclick=function(){ var act=['viewSession','viewProfile','viewCatalogue','viewPDP'].filter(function(v){var e=document.getElementById(v);return e&&getComputedStyle(e).display!=='none';})[0]||'viewCatalogue'; window.__billReturn=act; var known=!!(CUR&&CUR.detailed); var ph=document.getElementById('phone'); var nn=document.getElementById('bfNum'); if(nn) nn.value=known&&ph?(ph.value||''):''; var na=document.getElementById('bfName'); if(na) na.value=known&&CUR?(CUR.name||''):''; var nd=document.getElementById('bfDob'); if(nd) nd.value=known&&CUR&&CUR.dob?CUR.dob:''; var ne=document.getElementById('bfEmail'); if(ne) ne.value=known&&CUR&&CUR.email?CUR.email:''; document.querySelectorAll('#viewBilling .tenderChk.on').forEach(function(c){c.classList.remove('on');}); var hasTenders=!!(CUR&&CUR.detailed&&CUR.points&&CUR.points!=='0'); var _bt=document.getElementById('billTenders'),_bn=document.getElementById('billNoTenders'); if(_bt)_bt.style.display=hasTenders?'flex':'none'; if(_bn)_bn.style.display=hasTenders?'none':'block'; window.__hasTenders=hasTenders; closeEstimate(); showView('viewBilling'); if(window.__billSync)window.__billSync(); };
+  (function(){
+    function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+    function billSync(){ var okv=val('bfNum')&&val('bfName')&&val('bfAddr'); var pr=document.getElementById('billProceed'); if(pr){pr.style.opacity=okv?'1':'0.5';pr.style.pointerEvents=okv?'auto':'none';} }
+    window.__billSync=billSync;
+    var bk=document.getElementById('billBack'); if(bk) bk.onclick=function(){ showView(window.__billReturn||'viewCatalogue'); if(typeof openEstimate==='function'&&tray.length) openEstimate(); };
+    document.querySelectorAll('#viewBilling .tenderChk').forEach(function(c){ c.onclick=function(){ c.classList.toggle('on'); billSync(); }; });
+    ['bfNum','bfName','bfAddr','bfDob','bfEmail'].forEach(function(id){var e=document.getElementById(id); if(e) e.addEventListener('input',billSync);});
+    var pr=document.getElementById('billProceed'); if(pr) pr.onclick=function(){ var sel=[].slice.call(document.querySelectorAll('#viewBilling .tenderChk.on')); window.__redeemCount=sel.length; var total=0,html=''; sel.forEach(function(c){ var nm=c.getAttribute('data-tname'),disp=c.getAttribute('data-tdisp'),v=parseInt(c.getAttribute('data-tval'),10)||0; total+=v; html+='<div class="vfRow"><span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#796d62;">'+nm+'</span><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:14px;color:#2b5198;">'+disp+'</span></div>'; }); document.getElementById('vfList').innerHTML=html; document.getElementById('vfCount').textContent=sel.length+' item'+(sel.length===1?'':'s')+' selected'; document.getElementById('vfTotal').textContent=fmtMoney(total); document.getElementById('vfName').textContent=val('bfName')||'Customer'; var _n=val('bfNum'); var _mask='•••• '+(_n?_n.slice(-4):''); document.getElementById('otpDest').innerHTML=_mask; document.getElementById('otpDest2').innerHTML=_mask; if(window.__otpReset)window.__otpReset(); document.getElementById('vfConsent').classList.remove('on'); var sg=document.getElementById('vfSign'); sg.classList.remove('signed'); sg.innerHTML='<span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#A99F92;">Tap to capture signature</span>'; vfSync(); showView('viewVerify'); };
+    // verify wiring
+    var otpBoxes=[].slice.call(document.querySelectorAll('#otpBoxes .otpBox'));
+    function getOtp(){ return otpBoxes.map(function(b){return b.value;}).join(''); }
+    function vfSync(){ var okv=getOtp().length===6 && document.getElementById('vfSign').classList.contains('signed') && document.getElementById('vfConsent').classList.contains('on'); var r=document.getElementById('vfRedeem'); if(r){r.style.opacity=okv?'1':'0.5';r.style.pointerEvents=okv?'auto':'none';} }
+    var vb=document.getElementById('vfBack'); if(vb) vb.onclick=function(){ showView('viewBilling'); };
+    var ve=document.getElementById('vfEdit'); if(ve) ve.onclick=function(){ showView('viewBilling'); };
+    // segmented OTP entry: auto-advance, backspace, paste
+    otpBoxes.forEach(function(b,i){
+      b.addEventListener('input',function(){ b.value=b.value.replace(/[^0-9]/g,'').slice(0,1); b.classList.toggle('filled',!!b.value); if(b.value&&i<otpBoxes.length-1)otpBoxes[i+1].focus(); vfSync(); });
+      b.addEventListener('keydown',function(e){ if(e.key==='Backspace'&&!b.value&&i>0){otpBoxes[i-1].focus();} });
+      b.addEventListener('paste',function(e){ e.preventDefault(); var d=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/[^0-9]/g,'').slice(0,6); for(var j=0;j<otpBoxes.length;j++){otpBoxes[j].value=d[j]||'';otpBoxes[j].classList.toggle('filled',!!d[j]);} (otpBoxes[Math.min(d.length,5)]||b).focus(); vfSync(); });
+    });
+    var _otpIv=null;
+    function startResend(){ var el=document.getElementById('otpResend'); if(!el)return; clearInterval(_otpIv); var s=30; el.style.cursor='default'; el.style.color='#A99F92'; el.textContent='Resend in 0:'+(s<10?'0'+s:s); _otpIv=setInterval(function(){ s--; if(s<=0){ clearInterval(_otpIv); el.textContent='Resend OTP'; el.style.color='#2b5198'; el.style.cursor='pointer'; } else { el.textContent='Resend in 0:'+(s<10?'0'+s:s); } },1000); }
+    function sendOtp(){ var n=val('bfNum'); document.getElementById('otpStart').style.display='none'; var oe=document.getElementById('otpEnter'); oe.style.display='flex'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); toast('OTP sent to \u2022\u2022\u2022\u2022 '+(n?n.slice(-4):'')); }
+    window.__otpReset=function(){ clearInterval(_otpIv); document.getElementById('otpStart').style.display='flex'; document.getElementById('otpEnter').style.display='none'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); };
+    var vs=document.getElementById('vfSend'); if(vs) vs.onclick=sendOtp;
+    var rs=document.getElementById('otpResend'); if(rs) rs.onclick=function(){ if(rs.style.cursor==='pointer'){ otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); vfSync(); toast('A new OTP has been sent.'); } };
+    var sg=document.getElementById('vfSign'); if(sg) sg.onclick=function(){ sg.classList.add('signed'); sg.innerHTML='<span style="font-family:Playfair Display,serif;font-style:italic;font-weight:500;font-size:26px;color:#1a1917;">'+(val('bfName')||'Signed')+'</span>'; vfSync(); };
+    var vc=document.getElementById('vfConsent'); if(vc) vc.onclick=function(){ vc.classList.toggle('on'); vfSync(); };
+    var vr=document.getElementById('vfRedeem'); if(vr) vr.onclick=function(){ var rc=window.__redeemCount||0; var sub=document.querySelector('#viewDone .doneSub'); if(sub) sub.innerHTML=rc>0?'Your redemption request is verified.<br/>Please proceed to the cash counter for payment.':'Their billing details are captured.<br/>Please proceed to the cash counter for payment.'; if(window.__finalizeSession)window.__finalizeSession('purchased', rc>0?'Redeemed':''); showView('viewDone'); };
+    var dh=document.getElementById('doneHome'); if(dh) dh.onclick=function(){ if(typeof fullReset==='function'){fullReset();} else { if(typeof reset==='function')reset(); CUR=null; if(typeof updateChrome==='function')updateChrome(); showView('viewSession'); } };
+    // ---- magic: build the sparkle field + radiating rays each time the screen opens ----
+    window.__playDone=function(){
+      // the journey is complete — reflect that the session has ended in the app bar
+      // paint the Indriya gazelle in gold (reuse the logo silhouette as a mask)
+      var sp=document.getElementById('doneSparks'); if(!sp) return; sp.innerHTML='';
+      var glyphs=['\u2726','\u2727','\u2728','\u2724','\u00b7'];
+      function rnd(a,b){return a+(b-a)*((Math.sin((sp.childElementCount+1)*97.13+a*1.7+b*0.3)+1)/2);}
+      for(var i=0;i<46;i++){
+        var s=document.createElement('span'); s.className='dSpark';
+        var g=glyphs[i%glyphs.length];
+        s.textContent=g;
+        var size=6+rnd(0,18); var x=rnd(2,98); var y=rnd(4,94);
+        var twk=(i%3===0);
+        s.style.left=x+'%'; s.style.top=y+'%'; s.style.fontSize=size+'px';
+        var delay=(rnd(0,18)/10).toFixed(2); var dur=(1.6+rnd(0,22)/10).toFixed(2);
+        if(twk){ s.style.animation='dTwinkle '+dur+'s ease-in-out '+delay+'s infinite'; }
+        else {
+          var ang=rnd(0,628)/100; var dist=60+rnd(0,180);
+          s.style.setProperty('--dx',(Math.cos(ang)*dist).toFixed(0)+'px');
+          s.style.setProperty('--dy',(Math.sin(ang)*dist).toFixed(0)+'px');
+          s.style.left='50%'; s.style.top='42%';
+          s.style.animation='dFloat '+(1.4+rnd(0,16)/10).toFixed(2)+'s ease-out '+(rnd(0,6)/10).toFixed(2)+'s forwards';
+        }
+        sp.appendChild(s);
+      }
+      var rw=document.querySelector('#viewDone .sealRays'); if(rw){ rw.innerHTML=''; for(var r=0;r<12;r++){ var ry=document.createElement('span'); ry.className='ray'; var rot=r*30; ry.style.setProperty('--rot',rot+'deg'); ry.style.transform='rotate('+rot+'deg)'; ry.style.animation='rayBurst .9s ease-out '+(0.7+r*0.012).toFixed(2)+'s 1 forwards'; rw.appendChild(ry); } }
+    };
+  })();
   var _showCat=showCatalogue; showCatalogue=function(){ _showCat(); var nm=CUR&&CUR.name?CUR.name:'Guest'; var t=(CUR&&CUR.tier)?CUR.tier:'New guest'; var pt=(CUR&&CUR.points&&CUR.points!=='0')?(CUR.points+' loyalty points'):'Loyalty starts today'; var a=document.getElementById('ccName2'),b=document.getElementById('ccTier2'),c=document.getElementById('ccPts2'); if(a)a.textContent=nm; if(b)b.textContent=t; if(c)c.textContent=pt; };
   var _fr=fullReset; fullReset=function(){ tray=[]; document.querySelectorAll('.addbtn.added').forEach(function(b){b.textContent='Add';b.classList.remove('added');}); var pa=document.getElementById('pdpAdd'); if(pa){pa.textContent='Add to selection';pa.style.background='#C8A14A';} renderTray(); _fr(); };
   renderTray();
@@ -594,9 +769,12 @@
     applyBar(document.querySelector('#viewCatalogue .bar'), true, 'viewSearch');
     applyBar(document.querySelector('#viewProfile .bar'), true, 'viewSession');
     applyBar(document.querySelector('#viewPDP .bar'), true, 'viewCatalogue');
+    applyBar(document.querySelector('#viewBilling .bar'), true, '__bill__');
+    applyBar(document.querySelector('#viewVerify .bar'), true, 'viewBilling');
+    applyBar(document.querySelector('#viewDone .bar'), false, '');
     document.querySelectorAll('.endSess').forEach(function(b){b.onclick=function(){fullReset();toast('Session ended.');};});
     document.querySelectorAll('.addGuest').forEach(function(b){b.onclick=openGuestModal;});
-    document.querySelectorAll('.navback').forEach(function(b){b.onclick=function(){var t=b.getAttribute('data-bt'); if(t==='__cat__'||t==='__from__'){showView(catFrom);} else if(t==='viewSearch'){showSearch();} else {showView(t);}};});
+    document.querySelectorAll('.navback').forEach(function(b){b.onclick=function(){var t=b.getAttribute('data-bt'); if(t==='__cat__'||t==='__from__'){showView(catFrom);} else if(t==='__bill__'){showView(window.__billReturn||'viewCatalogue'); if(typeof openEstimate==='function'&&typeof tray!=='undefined'&&tray.length)openEstimate();} else if(t==='viewSearch'){showSearch();} else {showView(t);}};});
   })();
   function setChips(){var nm=(CUR&&CUR.name)?CUR.name:'Guest';var t=(CUR&&CUR.tier)?CUR.tier:'New guest';var pt=(CUR&&CUR.points&&CUR.points!=='0')?(CUR.points+' loyalty points'):'Loyalty starts today';document.querySelectorAll('.chipName').forEach(function(e){e.textContent=nm;});document.querySelectorAll('.chipTier').forEach(function(e){e.textContent=t;});document.querySelectorAll('.chipPts').forEach(function(e){e.textContent=pt;});}
   updateChrome=function(){setChips();var det=!!(CUR&&CUR.detailed);document.querySelectorAll('.custChip').forEach(function(e){e.style.display=det?'flex':'none';});document.querySelectorAll('.addGuest').forEach(function(e){e.style.display=det?'none':'inline-flex';});};
