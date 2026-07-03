@@ -831,7 +831,7 @@
       if(q){ var ql=q.toLowerCase(); c=cards.filter(function(x){return (x.getAttribute('data-name')||'').indexOf(ql)>-1;})[0]; }
       c=c||cards[0];
       var info=c.lastElementChild;
-      openPDP({name:info.children[1].textContent, price:info.children[2].textContent, cat:c.getAttribute('data-cat'), img:c.querySelector('img').src});
+      openPDP({name:info.children[1].textContent, price:info.children[2].textContent, cat:c.getAttribute('data-cat'), img:c.querySelector('img').src}); var _nb=document.querySelector('#viewPDP .navback'); if(_nb)_nb.setAttribute('data-bt','viewSearch');
     }
     function toggleGo(){ if(go) go.style.display=(si&&si.value.trim())?'inline-flex':'none'; }
     if(si){ si.addEventListener('input',toggleGo); si.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); var q=si.value.trim(); if(q){ openSerial(q); toast('Opening serial '+q); } } }); }
@@ -840,5 +840,7 @@
     var im=document.getElementById('srchImage'); if(im) im.onclick=function(){ toast('Snap or upload a photo to find similar pieces.'); };
   })();
   setToggle('product');
+
+  (function(){ if(typeof openPDP==='function'){ var _opb=openPDP; openPDP=function(pp){ _opb(pp); var nb=document.querySelector('#viewPDP .navback'); if(nb)nb.setAttribute('data-bt','viewCatalogue'); }; } })();
 
 </script></body></html>
