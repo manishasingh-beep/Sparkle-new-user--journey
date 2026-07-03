@@ -608,7 +608,7 @@
     SESSIONS.forEach(function(s){
       var isP=s.status==='purchased';
       var badge=isP?'<span class="purBadge">Purchased</span>':'<span class="noPurBadge">Didn’t purchase</span>';
-      var right=s.detail?('<span class="compTag'+(isP?'':' neutral')+'">'+(isP?CHECK_SVG:'')+s.detail+'</span>'):'';
+      var right='<span class="compTag'+(isP?'':' neutral')+'">'+(isP?CHECK_SVG:'')+'Completed</span>';
       cards+='<div class="sessCard" data-stype="'+(isP?'purchased':'notpurchased')+'" style="margin-top:14px;"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+s.name+'</span><span style="color:#D9D0C2;">|</span>'+badge+'</div>'+metaLine(s.who,s.when,s.intent,s.pieces)+'</div>'+right+'</div>';});
     var total=(active?1:0)+SESSIONS.length;
     if(total>0){ong.innerHTML=cards;ong.style.display='block';if(emp)emp.style.display='none';if(cnt)cnt.textContent=' ('+total+')';}
