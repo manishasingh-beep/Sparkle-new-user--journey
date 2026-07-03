@@ -415,7 +415,7 @@
               <div style="display:flex;align-items:center;gap:6px;font-family:'DM Sans';font-size:13px;"><span style="color:#A99F92;">Didn&rsquo;t receive it?</span><span id="otpResend" style="color:#A99F92;font-weight:600;cursor:default;">Resend in 0:30</span></div>
             </div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:12px;"><span class="bfLab">Customer Signature*</span><div id="vfSign" class="sigBox"><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#A99F92;">Tap to capture signature</span></div></div>
+          
           <div style="display:flex;align-items:center;gap:12px;"><span class="tenderChk" id="vfConsent"></span><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#2b5198;">I consent to the redemption of the above selected tenders*</span></div>
         </div>
       </div>
@@ -813,6 +813,18 @@
     function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
     function billSync(){ var okv=val('bfNum')&&val('bfName')&&val('bfAddr'); var pr=document.getElementById('billProceed'); if(pr){pr.style.opacity=okv?'1':'0.5';pr.style.pointerEvents=okv?'auto':'none';} }
     window.__billSync=billSync;
+    function billRecog(){
+      var ph=val('bfNum'); var k=(typeof KNOWN!=='undefined')?KNOWN[ph]:null;
+      if(k){ CUR=Object.assign({},k,{detailed:true}); var na=document.getElementById('bfName'); if(na&&!na.value.trim())na.value=k.name; }
+      else { CUR={name:(val('bfName')||'Guest'),tier:'Walk-in',points:'0',detailed:true}; }
+      var cnt=(window.__renderTenders?window.__renderTenders():0);
+      var bt=document.getElementById('billTenders'),bn=document.getElementById('billNoTenders');
+      if(bt)bt.style.display=cnt>0?'flex':'none'; if(bn)bn.style.display=cnt>0?'none':'block';
+      if(typeof updateChrome==='function')updateChrome();
+      billSync();
+    }
+    window.__billRecog=billRecog;
+    var _bfn=document.getElementById('bfNum'); if(_bfn) _bfn.addEventListener('input', billRecog);
     // ---- tenders: name + id + description, scheme (GGP/GQP) only when ongoing ----
     var SCHEME_NAMES={GGP:'Gold Growth Plan',GQP:'Gold Quick Plan'};
     function _tval(x){return parseInt(String(x).replace(/[^0-9]/g,''),10)||0;}
@@ -836,11 +848,11 @@
     var bk=document.getElementById('billBack'); if(bk) bk.onclick=function(){ showView(window.__billReturn||'viewCatalogue'); if(typeof openEstimate==='function'&&tray.length) openEstimate(); };
     document.querySelectorAll('#viewBilling .tenderChk').forEach(function(c){ c.onclick=function(){ c.classList.toggle('on'); billSync(); }; });
     ['bfNum','bfName','bfAddr','bfDob','bfEmail'].forEach(function(id){var e=document.getElementById(id); if(e) e.addEventListener('input',billSync);});
-    var pr=document.getElementById('billProceed'); if(pr) pr.onclick=function(){ var sel=[].slice.call(document.querySelectorAll('#viewBilling .tenderChk.on')); window.__redeemCount=sel.length; var total=0,html=''; sel.forEach(function(c){ var nm=c.getAttribute('data-tname'),disp=c.getAttribute('data-tdisp'),v=parseInt(c.getAttribute('data-tval'),10)||0; total+=v; html+='<div class="vfRow"><span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#796d62;">'+nm+'</span><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:14px;color:#2b5198;">'+disp+'</span></div>'; }); document.getElementById('vfList').innerHTML=html; document.getElementById('vfCount').textContent=sel.length+' item'+(sel.length===1?'':'s')+' selected'; document.getElementById('vfTotal').textContent=fmtMoney(total); document.getElementById('vfName').textContent=val('bfName')||'Customer'; var _n=val('bfNum'); var _mask='•••• '+(_n?_n.slice(-4):''); document.getElementById('otpDest').innerHTML=_mask; document.getElementById('otpDest2').innerHTML=_mask; if(window.__otpReset)window.__otpReset(); document.getElementById('vfConsent').classList.remove('on'); var sg=document.getElementById('vfSign'); sg.classList.remove('signed'); sg.innerHTML='<span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#A99F92;">Tap to capture signature</span>'; vfSync(); showView('viewVerify'); };
+    var pr=document.getElementById('billProceed'); if(pr) pr.onclick=function(){ var sel=[].slice.call(document.querySelectorAll('#viewBilling .tenderChk.on')); window.__redeemCount=sel.length; var total=0,html=''; sel.forEach(function(c){ var nm=c.getAttribute('data-tname'),disp=c.getAttribute('data-tdisp'),v=parseInt(c.getAttribute('data-tval'),10)||0; total+=v; html+='<div class="vfRow"><span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#796d62;">'+nm+'</span><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:14px;color:#2b5198;">'+disp+'</span></div>'; }); document.getElementById('vfList').innerHTML=html; document.getElementById('vfCount').textContent=sel.length+' item'+(sel.length===1?'':'s')+' selected'; document.getElementById('vfTotal').textContent=fmtMoney(total); document.getElementById('vfName').textContent=val('bfName')||'Customer'; var _n=val('bfNum'); var _mask='•••• '+(_n?_n.slice(-4):''); document.getElementById('otpDest').innerHTML=_mask; document.getElementById('otpDest2').innerHTML=_mask; if(window.__otpReset)window.__otpReset(); document.getElementById('vfConsent').classList.remove('on'); vfSync(); showView('viewVerify'); };
     // verify wiring
     var otpBoxes=[].slice.call(document.querySelectorAll('#otpBoxes .otpBox'));
     function getOtp(){ return otpBoxes.map(function(b){return b.value;}).join(''); }
-    function vfSync(){ var okv=getOtp().length===6 && document.getElementById('vfSign').classList.contains('signed') && document.getElementById('vfConsent').classList.contains('on'); var r=document.getElementById('vfRedeem'); if(r){r.style.opacity=okv?'1':'0.5';r.style.pointerEvents=okv?'auto':'none';} }
+    function vfSync(){ var okv=getOtp().length===6 && document.getElementById('vfConsent').classList.contains('on'); var r=document.getElementById('vfRedeem'); if(r){r.style.opacity=okv?'1':'0.5';r.style.pointerEvents=okv?'auto':'none';} }
     var vb=document.getElementById('vfBack'); if(vb) vb.onclick=function(){ showView('viewBilling'); };
     var ve=document.getElementById('vfEdit'); if(ve) ve.onclick=function(){ showView('viewBilling'); };
     // segmented OTP entry: auto-advance, backspace, paste
