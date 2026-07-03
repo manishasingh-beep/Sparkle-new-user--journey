@@ -70,6 +70,22 @@
   .addbtn:hover{background:#0A2A66;color:#fff;}
   .addbtn.added{background:#FBF5E9;border-color:#C8A14A;color:#9C7A2F;}
   .pdpact:hover,.moreopt:hover{border-color:#C8A14A;}
+  .invSize{display:flex;flex-direction:column;gap:1px;border:1px solid #E6E0D6;border-radius:12px;padding:10px 12px;cursor:pointer;background:#fff;transition:border-color .12s,background .12s;}
+  .invSize:hover{border-color:#C8A14A;}
+  .invSize.on{border-color:#2B5198;background:#F2F6FD;box-shadow:inset 0 0 0 1px #2B5198;}
+  .invSize .invSizeN{font-family:'DM Sans';font-weight:700;font-size:15px;color:#0A2A66;}
+  .invSize .invSizeMm{font-family:'DM Sans';font-weight:500;font-size:12px;color:#3A4252;}
+  .invSize .invSizeS{font-family:'DM Sans';font-weight:500;font-size:11px;color:#9B8F7E;margin-top:3px;}
+  .invAvail{display:flex;flex-direction:column;gap:4px;border:1px solid #E6E0D6;border-radius:12px;padding:11px 14px;cursor:pointer;background:#fff;transition:border-color .12s,background .12s;}
+  .invAvail:hover{border-color:#C8A14A;}
+  .invAvail.on{border-color:#2B5198;background:#F2F6FD;box-shadow:inset 0 0 0 1px #2B5198;}
+  .invAvail .invAvailK{font-family:'DM Sans';font-weight:600;font-size:13px;color:#3A4252;}
+  .invAvail .invAvailN{font-family:'Playfair Display',serif;font-weight:600;font-size:20px;color:#0A2A66;line-height:1;}
+  .invRow{display:grid;grid-template-columns:1.2fr 1.3fr 1fr 52px;align-items:center;padding:15px 6px;border-top:1px solid #F2EEE6;font-family:'DM Sans';font-weight:500;font-size:14px;color:#3A4252;}
+  .invRow .invSerial{font-weight:600;color:#0A2A66;letter-spacing:.3px;}
+  .invAddBtn{width:38px;height:38px;border-radius:50%;border:1px solid #C4D5FB;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0A2A66;transition:all .14s;justify-self:end;padding:0;}
+  .invAddBtn:hover{border-color:#0A2A66;}
+  .invAddBtn.on{background:#0A2A66;border-color:#0A2A66;color:#fff;}
   .traythumb{position:relative;width:64px;height:64px;border-radius:11px;border:1px solid #E8E1D6;flex:none;background:#F4EEE4;} .traythumb img{border-radius:10px;}
   .traythumb img{width:100%;height:100%;object-fit:cover;}
   .traythumb .x{position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;background:#0A2A66;border:1.5px solid #fff;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;line-height:1;z-index:5;box-shadow:0 1px 4px rgba(0,0,0,0.3);}
@@ -357,7 +373,8 @@
 </div>
 <div class="view" id="viewPDP" style="display:none;">
   <div class="bar"></div>
-  <div style="flex:1;overflow-y:auto;padding:28px 40px 120px;">
+  <div class="viewToggle" style="padding:12px 40px 14px;display:flex;flex:none;"><div style="flex:1;background:#F7FAFE;border:1px solid #E2EBFF;border-radius:14px;padding:8px;display:flex;gap:8px;"><button class="tgProduct" style="flex:1;height:40px;border:none;border-radius:11px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;background:transparent;color:#343330;box-shadow:none;">Product View</button><button class="tgCatalogue" style="flex:1;height:40px;border:none;border-radius:11px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;background:#fff;color:#2B5198;box-shadow:0 1px 2px rgba(26,25,23,0.1);">Catalogue View</button></div></div>
+  <div style="flex:1;overflow-y:auto;padding:16px 40px 120px;">
     <div style="display:flex;gap:30px;align-items:flex-start;">
       <div style="width:320px;flex:none;">
         <div style="border:1px solid #E2EBFF;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 4px 6px rgba(0,0,0,0.06);">
@@ -529,6 +546,37 @@
   </div>
 </div>
   <div id="metalPop" style="display:none;position:absolute;top:80px;right:40px;width:286px;background:#fff;border:1px solid #E8E1D6;border-radius:14px;box-shadow:0 20px 50px rgba(7,20,42,0.22);padding:16px 18px 6px;z-index:55;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;"><span style="font-family:'Playfair Display',serif;font-weight:600;font-size:17px;color:#0A2A66;">Today’s rates</span><span style="font-family:'DM Sans';font-weight:500;font-size:11px;color:#9B8F7E;">per gram · 25 Jun 2026</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #F0EADF;"><span style="display:flex;align-items:center;gap:9px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#3A4252;"><span style="width:9px;height:9px;border-radius:50%;background:#C8A14A;"></span>Gold 24K</span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;">₹ 9,322</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #F0EADF;"><span style="display:flex;align-items:center;gap:9px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#3A4252;"><span style="width:9px;height:9px;border-radius:50%;background:#D8B86A;"></span>Gold 22K</span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;">₹ 8,545</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #F0EADF;"><span style="display:flex;align-items:center;gap:9px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#3A4252;"><span style="width:9px;height:9px;border-radius:50%;background:#AEB4BC;"></span>Silver</span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;">₹ 96</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;"><span style="display:flex;align-items:center;gap:9px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#3A4252;"><span style="width:9px;height:9px;border-radius:50%;background:#8E99A6;"></span>Platinum</span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;">₹ 3,250</span></div></div>
+  </div>
+  <div id="invModal" style="display:none;position:absolute;inset:0;z-index:80;">
+    <div id="invBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.5);"></div>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:986px;max-width:calc(100% - 40px);max-height:calc(100% - 40px);background:#fff;border:1px solid #ECE5DA;border-radius:20px;box-shadow:0 32px 60px rgba(26,25,23,0.28);display:flex;flex-direction:column;overflow:hidden;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid #F0EBE1;flex:none;">
+        <div style="display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:700;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#B89149;">Inventory</span><span id="invTitle" style="font-family:'Playfair Display',serif;font-weight:600;font-size:20px;color:#0A2A66;line-height:1.1;">Product</span></div>
+        <button id="invClose" style="width:34px;height:34px;border:1px solid #C4D5FB;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#0A2A66" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:22px 24px 24px;">
+        <div style="display:flex;gap:24px;align-items:flex-start;">
+          <div style="width:214px;flex:none;">
+            <div style="border:1px solid #EFE8DC;border-radius:14px;overflow:hidden;background:#F4EEE4;height:178px;"><img id="invImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+            <div id="invName" style="font-family:'DM Sans';font-weight:600;font-size:15px;color:#0A2A66;cursor:pointer;line-height:20px;margin-top:12px;">Product</div>
+            <div style="display:flex;align-items:baseline;gap:7px;margin-top:7px;"><span id="invPrice" style="font-family:'DM Sans';font-weight:700;font-size:15px;color:#1a1917;">&#8377; &mdash;</span><span style="font-family:'DM Sans';font-weight:500;font-size:12px;color:#9B8F7E;">Approx.</span></div>
+            <div style="margin-top:6px;font-family:'DM Sans';font-weight:500;font-size:12px;color:#7C7268;">Weight <span style="color:#1a1917;font-weight:600;">10.9 g</span></div>
+            <button id="invPdp" style="margin-top:14px;width:100%;height:38px;border:1px solid #C4D5FB;border-radius:10px;background:#fff;font-family:'DM Sans';font-weight:600;font-size:13px;color:#0A2A66;cursor:pointer;">View full details</button>
+          </div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-family:'DM Sans';font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#B89149;margin-bottom:12px;">Available Sizes</div>
+            <div id="invSizes" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;"></div>
+          </div>
+          <div style="width:224px;flex:none;">
+            <div style="font-family:'DM Sans';font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#B89149;margin-bottom:12px;">Place Availability</div>
+            <div id="invAvail" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+          </div>
+        </div>
+        <div style="height:1px;background:#F0EBE1;margin:22px 0 2px;"></div>
+        <div style="display:grid;grid-template-columns:1.2fr 1.3fr 1fr 52px;padding:14px 6px 8px;font-family:'DM Sans';font-weight:700;font-size:11px;letter-spacing:0.8px;text-transform:uppercase;color:#9B8F7E;"><span>City</span><span>Store</span><span>Serial No</span><span></span></div>
+        <div id="invRows"></div>
+      </div>
+    </div>
   </div>
   <div id="toast"></div>
 </div>
@@ -708,7 +756,7 @@
     var info=c.lastElementChild;
     var name=info.children[1].textContent, price=info.children[2].textContent, cat=c.getAttribute('data-cat'), img=c.querySelector('img').src;
     var prod={name:name,price:price,cat:cat,img:img};
-    c.addEventListener('click',function(){ openPDP(prod); });
+    c.addEventListener('click',function(){ openInventory(prod); });
   });
   function openPDP(prod){ ensureInTray(prod); document.getElementById('pdpName').textContent='22KT Yellow Gold with Stone Neckwear - Choker.'; document.getElementById('pdpImg').src=prod.img; document.getElementById('pdpTotal').textContent=prod.price; var v=document.getElementById('viewPDP'); v.setAttribute('data-name',prod.name); v.setAttribute('data-price',prod.price); v.setAttribute('data-img',prod.img); v.setAttribute('data-cat',prod.cat); showView('viewPDP'); }
   var _pdpBk=document.getElementById('pdpBack'); if(_pdpBk) _pdpBk.onclick=function(){ showView('viewCatalogue'); };
@@ -922,4 +970,42 @@
 
   (function(){ if(typeof openPDP==='function'){ var _opb=openPDP; openPDP=function(pp){ _opb(pp); var nb=document.querySelector('#viewPDP .navback'); if(nb)nb.setAttribute('data-bt','viewCatalogue'); }; } })();
 
+
+  // ---- inventory pop-up (v2) ----
+  var INV_SIZES=[{n:5,mm:'44.8 mm',s:'Only 2 left'},{n:6,mm:'45.9 mm',s:'Only 1 left'},{n:7,mm:'47.1 mm',s:'Only 2 left'},{n:9,mm:'49.0 mm',s:'Only 2 left'},{n:10,mm:'50.0 mm',s:'3 left'},{n:11,mm:'51.8 mm',s:'Only 2 left'},{n:8,mm:'48.1 mm',s:'5 in stock'},{n:12,mm:'52.8 mm',s:'4 in stock'}];
+  var INV_AVAIL=[{k:'Store',n:4},{k:'Warehouse',n:2},{k:'Rest of India',n:7},{k:'City',n:1}];
+  var INV_ROWS=[{city:'Ahmedabad (W)',store:'CG Road',serial:'A918799'},{city:'Ahmedabad (W)',store:'Shivranjani',serial:'A908792'},{city:'Delhi (N)',store:'Pitampura',serial:'A908781'},{city:'Delhi (N)',store:'Rajouri Garden',serial:'A918896'},{city:'Mumbai (S)',store:'Bandra Linking Rd',serial:'A918744'},{city:'Bengaluru',store:'Indiranagar',serial:'A907120'}];
+  var INV_PLUS='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+  var INV_CHECK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  var INV_PROD=null;
+  function invTrayName(serial){return (INV_PROD?INV_PROD.name:'')+' · '+serial;}
+  function invInTray(serial){var nm=invTrayName(serial);for(var i=0;i<tray.length;i++){if(tray[i].name===nm)return true;}return false;}
+  function renderInvRows(){var host=document.getElementById('invRows');if(!host)return;
+    host.innerHTML=INV_ROWS.map(function(r){var added=invInTray(r.serial);return '<div class="invRow"><span>'+r.city+'</span><span>'+r.store+'</span><span class="invSerial">'+r.serial+'</span><button class="invAddBtn'+(added?' on':'')+'" data-serial="'+r.serial+'" title="'+(added?'Remove from tray':'Add to tray')+'">'+(added?INV_CHECK:INV_PLUS)+'</button></div>';}).join('');
+    host.querySelectorAll('.invAddBtn').forEach(function(b){b.onclick=function(){invToggle(b.getAttribute('data-serial'),b);};});}
+  function invToggle(serial,btn){ if(!INV_PROD)return;
+    var nm=invTrayName(serial);var idx=-1;for(var i=0;i<tray.length;i++){if(tray[i].name===nm){idx=i;break;}}
+    if(idx>-1){tray.splice(idx,1);btn.classList.remove('on');btn.innerHTML=INV_PLUS;btn.title='Add to tray';toast('Removed '+serial+' from tray.');}
+    else{tray.push({name:nm,price:INV_PROD.price,cat:INV_PROD.cat,img:INV_PROD.img,serial:serial});btn.classList.add('on');btn.innerHTML=INV_CHECK;btn.title='Remove from tray';toast(INV_PROD.name+' ('+serial+') added to tray.');}
+    if(typeof renderTray==='function')renderTray();}
+  function openInventory(prod){ if(!prod)return; if(typeof startSession==='function')startSession(); window.__sessViewed=true; INV_PROD=prod;
+    var t=document.getElementById('invTitle'); if(t)t.textContent=prod.name;
+    var n=document.getElementById('invName'); if(n)n.textContent=prod.name;
+    var pr=document.getElementById('invPrice'); if(pr)pr.textContent=prod.price;
+    var im=document.getElementById('invImg'); if(im)im.src=prod.img;
+    var sz=document.getElementById('invSizes'); if(sz){sz.innerHTML=INV_SIZES.map(function(z,i){return '<div class="invSize'+(i===0?' on':'')+'" data-n="'+z.n+'"><span class="invSizeN">'+z.n+'</span><span class="invSizeMm">'+z.mm+'</span><span class="invSizeS">'+z.s+'</span></div>';}).join('');
+      sz.querySelectorAll('.invSize').forEach(function(el){el.onclick=function(){sz.querySelectorAll('.invSize').forEach(function(x){x.classList.remove('on');});el.classList.add('on');};});}
+    var av=document.getElementById('invAvail'); if(av){av.innerHTML=INV_AVAIL.map(function(a,i){return '<div class="invAvail'+(i===0?' on':'')+'" data-k="'+a.k+'"><span class="invAvailK">'+a.k+'</span><span class="invAvailN">'+a.n+'</span></div>';}).join('');
+      av.querySelectorAll('.invAvail').forEach(function(el){el.onclick=function(){av.querySelectorAll('.invAvail').forEach(function(x){x.classList.remove('on');});el.classList.add('on');};});}
+    renderInvRows();
+    var m=document.getElementById('invModal'); if(m)m.style.display='block';}
+  function closeInventory(){var m=document.getElementById('invModal'); if(m)m.style.display='none';}
+  (function(){
+    var c=document.getElementById('invClose'); if(c)c.onclick=closeInventory;
+    var bd=document.getElementById('invBackdrop'); if(bd)bd.onclick=closeInventory;
+    function toPdp(){closeInventory(); if(INV_PROD&&typeof openPDP==='function')openPDP(INV_PROD);}
+    var pv=document.getElementById('invPdp'); if(pv)pv.onclick=toPdp;
+    var nm=document.getElementById('invName'); if(nm)nm.onclick=toPdp;
+    document.querySelectorAll('#viewPDP .moreopt').forEach(function(b){ if(/Inventory/i.test(b.textContent)){ b.onclick=function(){ var v=document.getElementById('viewPDP'); openInventory({name:v.getAttribute('data-name'),price:v.getAttribute('data-price'),cat:v.getAttribute('data-cat'),img:v.getAttribute('data-img')}); }; } });
+  })();
 </script></body></html>
