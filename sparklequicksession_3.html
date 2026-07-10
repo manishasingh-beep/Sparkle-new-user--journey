@@ -156,6 +156,8 @@
   .doneSeal .sealCore{transform-origin:center;animation:sealPop .6s cubic-bezier(.34,1.56,.64,1) both;}
   .doneSeal .ringPath{stroke-dasharray:339;stroke-dashoffset:339;animation:ringDraw .8s ease-out .15s forwards;}
   .doneSeal .checkPath{stroke-dasharray:48;stroke-dashoffset:48;animation:checkDraw .45s ease-out .75s forwards;}
+  .doneSeal .doneGaz{position:absolute;left:50%;top:50%;width:60px;height:auto;transform:translate(-50%,-50%);opacity:0;animation:gazPop .55s cubic-bezier(.34,1.56,.64,1) .55s both;}
+  @keyframes gazPop{from{opacity:0;transform:translate(-50%,-50%) scale(.55);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
   .doneSeal .ray{position:absolute;left:50%;top:50%;width:3px;height:16px;border-radius:3px;background:linear-gradient(#F4E2B6,rgba(244,226,182,0));transform-origin:center -34px;opacity:0;}
   @keyframes rayBurst{0%{opacity:0;transform:rotate(var(--rot)) translateY(8px) scaleY(.2);}40%{opacity:1;}100%{opacity:0;transform:rotate(var(--rot)) translateY(-10px) scaleY(1);}}
   .doneTitle{font-family:'Playfair Display',serif;font-weight:600;font-size:38px;line-height:1.15;color:#fff;letter-spacing:-0.6px;margin:0;}
@@ -473,10 +475,10 @@
           <div class="doneSeal">
             <div class="ringGlow"></div>
             <svg viewBox="0 0 128 128" fill="none">
-              <circle class="ringPath" cx="64" cy="64" r="54" stroke="#E7CB8E" stroke-width="3" stroke-linecap="round"/><path class="checkPath" d="M44 65l13 14 27-31" stroke="#E7CB8E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="ringPath" cx="64" cy="64" r="54" stroke="#E7CB8E" stroke-width="3" stroke-linecap="round"/>
             </svg>
             
-            <div class="sealRays"></div>
+            <img class="doneGaz" alt=""/><div class="sealRays"></div>
           </div>
           <h1 class="doneTitle doneRise" style="animation-delay:.5s;">Details captured <span class="em">&#10024;</span></h1>
           <div class="doneDiv doneRise" style="margin:20px 0 18px;animation-delay:.62s;"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
@@ -878,6 +880,7 @@
       // the journey is complete — reflect that the session has ended in the app bar
       // paint the Indriya gazelle in gold (reuse the logo silhouette as a mask)
       var sp=document.getElementById('doneSparks'); if(!sp) return; sp.innerHTML='';
+      var _dg=document.querySelector('#viewDone .doneGaz'); var _gz=document.getElementById('gz'); if(_dg&&_gz){ _dg.src=_gz.src; _dg.style.animation='none'; void _dg.offsetWidth; _dg.style.animation=''; }
       var glyphs=['\u2726','\u2727','\u2728','\u2724','\u00b7'];
       function rnd(a,b){return a+(b-a)*((Math.sin((sp.childElementCount+1)*97.13+a*1.7+b*0.3)+1)/2);}
       for(var i=0;i<46;i++){
