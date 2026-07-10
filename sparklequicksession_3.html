@@ -122,13 +122,12 @@
   .billField{width:100%;height:50px;padding:0 14px;background:#fff;border:1px solid #CCC;border-radius:12px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#1a1917;outline:none;transition:border-color .15s,box-shadow .15s;}
   .billField::placeholder{color:#A99F92;}
   .billField:focus{border-color:#C4D5FB;box-shadow:0 0 0 3px rgba(196,213,251,0.35);}
-  #viewBilling{background:#fff;}
   #viewBilling .billField{background:rgba(227,200,131,0.10);border:1px solid #E3C883;}
   #viewBilling .billField:focus{border-color:#C8A14A;box-shadow:0 0 0 3px rgba(200,161,74,0.20);}
   #viewBilling .bfLab{color:#5A4A22;}
-  .goldPill{display:inline-flex;align-items:center;height:38px;padding:0 16px;border-radius:999px;border:1px solid #E3C883;background:rgba(227,200,131,0.10);font-family:'DM Sans';font-weight:500;font-size:14px;color:#6A5320;cursor:pointer;transition:all .14s;}
+  .goldPill{display:inline-flex;align-items:center;height:38px;padding:0 16px;border-radius:999px;border:1px solid #E3C883;background:rgba(227,200,131,0.10);font-family:'DM Sans';font-weight:500;font-size:14px;color:#0A2A66;cursor:pointer;transition:all .14s;}
   .goldPill:hover{border-color:#C8A14A;}
-  .goldPill.on{background:linear-gradient(135deg,#EAD08C,#C8A14A);border-color:#C8A14A;color:#3A2708;font-weight:600;}
+  .goldPill.on{border-color:#C8A14A;box-shadow:inset 0 0 0 1px #C8A14A;font-weight:600;}
   .panCorner{position:absolute;width:26px;height:26px;}
   .panLine{position:absolute;left:6%;right:6%;height:2px;background:linear-gradient(90deg,rgba(231,203,142,0),#E7CB8E,rgba(231,203,142,0));animation:panSweep 1.6s ease-in-out infinite;}
   @keyframes panSweep{0%{top:10%;}50%{top:86%;}100%{top:10%;}}
@@ -421,7 +420,7 @@
           <div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Customer&rsquo;s Number*</span><div class="billField" style="display:flex;align-items:center;gap:10px;"><span style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#796d62;">+91</span><span style="font-weight:300;font-size:18px;color:#CCC;">|</span><input id="bfNum" maxlength="10" inputmode="numeric" placeholder="Mobile number" oninput="this.value=this.value.replace(/[^0-9]/g,'')" style="flex:1;border:none;outline:none;background:transparent;font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;"/></div></div>
           <div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Customer&rsquo;s Name*</span><input id="bfName" class="billField" placeholder="Full name"/></div>
           <div style="display:flex;gap:16px;width:100%;">
-            <div style="flex:1;"><div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Date of Birth*</span><input id="bfDob" class="billField" placeholder="DD / MM / YYYY"/></div></div>
+            <div style="flex:1;"><div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Date of Birth*</span><div style="position:relative;width:100%;"><input id="bfDob" class="billField" inputmode="numeric" maxlength="14" placeholder="DD / MM / YYYY" style="width:100%;padding-right:46px;"/><span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:#8A6A1C;display:flex;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg></span><input id="bfDobPicker" type="date" onclick="try{this.showPicker()}catch(e){}" aria-label="Pick date of birth" style="position:absolute;right:4px;top:50%;transform:translateY(-50%);width:42px;height:42px;opacity:0;cursor:pointer;"/></div></div></div>
             <div style="flex:1;"><div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Email</span><input id="bfEmail" class="billField" placeholder="name@email.com"/></div></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Gender</span><div id="bfGender" style="display:flex;flex-wrap:wrap;gap:10px;"><span class="goldPill" data-g="Male">Male</span><span class="goldPill" data-g="Female">Female</span><span class="goldPill" data-g="Other">Other</span></div></div>
@@ -848,6 +847,10 @@
     var _psb=document.getElementById('panScanBtn'); if(_psb)_psb.onclick=function(){_panClose();var sc=document.getElementById('panScan');if(sc)sc.style.display='flex';setTimeout(function(){_panScanClose();var e=document.getElementById('bfPan');if(e)e.value='ABCDE1234F';window.__panVerified=true;var st=document.getElementById('bfPanStatus');if(st)st.style.display='flex';toast('PAN fetched from card successfully.');billSync();},1700);};
     var _psc=document.getElementById('panScanClose'); if(_psc)_psc.onclick=_panScanClose;
     var _pin=document.getElementById('bfPan'); if(_pin)_pin.addEventListener('input',function(){window.__panVerified=false;var st=document.getElementById('bfPanStatus');if(st)st.style.display='none';billSync();});
+    var _dobEl=document.getElementById('bfDob');
+    if(_dobEl)_dobEl.addEventListener('input',function(){var d=_dobEl.value.replace(/\D/g,'').slice(0,8);var out=d.slice(0,2);if(d.length>2)out+=' / '+d.slice(2,4);if(d.length>4)out+=' / '+d.slice(4,8);_dobEl.value=out;if(window.__billSync)window.__billSync();});
+    var _dobPick=document.getElementById('bfDobPicker');
+    if(_dobPick)_dobPick.addEventListener('change',function(){var v=_dobPick.value;if(!v)return;var p=v.split('-');if(p.length===3&&_dobEl){_dobEl.value=p[2]+' / '+p[1]+' / '+p[0];if(window.__billSync)window.__billSync();}});
     // verify wiring
     var otpBoxes=[].slice.call(document.querySelectorAll('#otpBoxes .otpBox'));
     function getOtp(){ return otpBoxes.map(function(b){return b.value;}).join(''); }
