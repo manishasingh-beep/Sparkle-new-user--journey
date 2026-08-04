@@ -545,6 +545,27 @@
 </div>
   <div id="metalPop" style="display:none;position:absolute;top:80px;right:40px;width:286px;background:#fff;border:1px solid #E8E1D6;border-radius:14px;box-shadow:0 20px 50px rgba(7,20,42,0.22);padding:16px 18px 6px;z-index:55;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;"><span style="font-family:'Playfair Display',serif;font-weight:600;font-size:17px;color:#0A2A66;">Today’s rates</span><span style="font-family:'DM Sans';font-weight:500;font-size:11px;color:#9B8F7E;">per gram · 25 Jun 2026</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #F0EADF;"><span style="display:flex;align-items:center;gap:9px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#3A4252;"><span style="width:9px;height:9px;border-radius:50%;background:#C8A14A;"></span>Gold 24K</span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;">₹ 9,322</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #F0EADF;"><span style="display:flex;align-items:center;gap:9px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#3A4252;"><span style="width:9px;height:9px;border-radius:50%;background:#D8B86A;"></span>Gold 22K</span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;">₹ 8,545</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #F0EADF;"><span style="display:flex;align-items:center;gap:9px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#3A4252;"><span style="width:9px;height:9px;border-radius:50%;background:#AEB4BC;"></span>Silver</span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;">₹ 96</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;"><span style="display:flex;align-items:center;gap:9px;font-family:'DM Sans';font-weight:500;font-size:14px;color:#3A4252;"><span style="width:9px;height:9px;border-radius:50%;background:#8E99A6;"></span>Platinum</span><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;">₹ 3,250</span></div></div>
   </div>
+  <div id="addMorePop" style="display:none;position:absolute;inset:0;z-index:82;">
+    <div id="addMoreBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.5);"></div>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:560px;max-width:90%;background:#fff;border:1px solid #EAE6DF;border-radius:20px;padding:26px 28px 28px;box-shadow:0 30px 80px rgba(3,20,45,0.35);display:flex;flex-direction:column;gap:22px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <span style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#C8A14A;">Add product</span>
+          <span style="font-family:'Playfair Display',serif;font-weight:600;font-size:23px;color:#0A2A66;">Search more pieces</span>
+        </div>
+        <button id="addMoreClose" style="width:34px;height:34px;border-radius:50%;border:1px solid #E6E0D6;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6E6358" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <span style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;color:#6E6358;">Search by serial code</span>
+        <div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #D9D0C0;border-radius:12px;min-height:58px;padding:8px 8px 8px 18px;box-shadow:0 2px 3px rgba(0,0,0,0.05);"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" style="color:#6A6969;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m17 17l4 4m-2-10a8 8 0 1 0-16 0a8 8 0 0 0 16 0"/></svg><input id="amSerial" placeholder="Enter serial code" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:'DM Sans',sans-serif;font-weight:500;font-size:15px;color:#1A1917;"/><button id="amGo" style="display:none;height:42px;padding:0 22px;border:none;border-radius:8px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;flex:none;align-items:center;justify-content:center;">Search</button></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;"><span style="flex:1;height:1px;background:#ECE5DA;"></span><span style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:1px;color:#A99F92;">OR</span><span style="flex:1;height:1px;background:#ECE5DA;"></span></div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <span style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;color:#6E6358;">Search by barcode</span>
+        <button id="amScan" style="height:54px;border:1.3px solid #D9D0C0;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;gap:12px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:15px;color:#3A3A38;cursor:pointer;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" style="color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8V6a2 2 0 0 1 2-2h2M17 4h2a2 2 0 0 1 2 2v2M21 16v2a2 2 0 0 1-2 2h-2M7 20H5a2 2 0 0 1-2-2v-2"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M7 9.5v5M10 9.5v5M13.5 9.5v5M17 9.5v5"/></svg>Scan barcode</button>
+      </div>
+    </div>
+  </div>
   <div id="invModal" style="display:none;position:absolute;inset:0;z-index:80;">
     <div id="invBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.5);"></div>
     <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:986px;max-width:calc(100% - 40px);max-height:calc(100% - 40px);background:#fff;border:1px solid #ECE5DA;border-radius:20px;box-shadow:0 32px 60px rgba(26,25,23,0.28);display:flex;flex-direction:column;overflow:hidden;">
@@ -657,7 +678,7 @@
   document.getElementById('skipBtn').onclick=function(){ doneNumberOnly(); };
   
   
-  function reset(){ sel={cats:[],occ:null,who:null,'for':null,budget:null}; phone.value=''; ['nName','nEmail','nBday','nAnniv'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';}); document.querySelectorAll('.cat.sel,.chip.sel').forEach(function(e){e.classList.remove('sel');}); document.getElementById('recog').classList.remove('show'); showState('form'); if(typeof stopSession==='function')stopSession(); var _ag=document.getElementById('addGuestBtn'); if(_ag)_ag.style.display='none'; saveBtn.classList.add('disabled'); saveLbl.textContent='Save and continue'; summary(); document.getElementById('canvas').scrollTop=0; var _r=document.getElementById('rail'); if(_r)_r.classList.remove('on'); }
+  function reset(){ sel={cats:[],occ:null,who:null,'for':null,budget:null}; phone.value=''; ['nName','nEmail','nBday','nAnniv'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';}); document.querySelectorAll('.cat.sel,.chip.sel').forEach(function(e){e.classList.remove('sel');}); document.getElementById('recog').classList.remove('show'); showState('form'); if(typeof stopSession==='function')stopSession(); var _ag=document.getElementById('addGuestBtn'); if(_ag)_ag.style.display='none'; saveBtn.classList.add('disabled'); saveLbl.textContent='Save and continue'; summary(); document.getElementById('canvas').scrollTop=0; var _r=document.getElementById('rail'); if(_r)_r.classList.remove('on'); window.__currProd=null; }
   
   document.getElementById('endLink').onclick=function(){reset();toast('Session ended.');};
 
@@ -776,7 +797,7 @@
     var prod={name:name,price:price,cat:cat,img:img};
     c.addEventListener('click',function(){ openInventory(prod); });
   });
-  function openPDP(prod){ ensureInTray(prod); document.getElementById('pdpName').textContent='22KT Yellow Gold with Stone Neckwear - Choker.'; document.getElementById('pdpImg').src=prod.img; document.getElementById('pdpTotal').textContent=prod.price; var v=document.getElementById('viewPDP'); v.setAttribute('data-name',prod.name); v.setAttribute('data-price',prod.price); v.setAttribute('data-img',prod.img); v.setAttribute('data-cat',prod.cat); showView('viewPDP'); }
+  function openPDP(prod){ window.__currProd=prod; ensureInTray(prod); document.getElementById('pdpName').textContent='22KT Yellow Gold with Stone Neckwear - Choker.'; document.getElementById('pdpImg').src=prod.img; document.getElementById('pdpTotal').textContent=prod.price; var v=document.getElementById('viewPDP'); v.setAttribute('data-name',prod.name); v.setAttribute('data-price',prod.price); v.setAttribute('data-img',prod.img); v.setAttribute('data-cat',prod.cat); showView('viewPDP'); if(typeof setToggle==='function')setToggle('product'); }
   var _pdpBk=document.getElementById('pdpBack'); if(_pdpBk) _pdpBk.onclick=function(){ showView('viewCatalogue'); };
   var _pab=document.getElementById('pdpAdd'); if(_pab) _pab.onclick=function(){var v=document.getElementById('viewPDP'); var ok=addToTray({name:v.getAttribute('data-name'),price:v.getAttribute('data-price'),cat:v.getAttribute('data-cat'),img:v.getAttribute('data-img')}); if(ok){this.textContent='Added to selection \u2713';this.style.background='#E7CB8E';} };
   function estrow(l,v,strong){return '<div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-family:\'DM Sans\';font-weight:'+(strong?'600':'500')+';font-size:13px;color:'+(strong?'#1a1917':'#7C7268')+';">'+l+'</span><span style="font-family:\'DM Sans\';font-weight:'+(strong?'600':'500')+';font-size:13px;color:'+(strong?'#1a1917':'#3A4252')+';">'+v+'</span></div>';}
@@ -914,7 +935,21 @@
   renderClock();
   document.querySelectorAll('.trayPrev').forEach(function(b){b.onclick=function(){var c=b.parentNode.querySelector('.trayThumbs'); if(c)c.scrollBy({left:-220,behavior:'smooth'});};});
   document.querySelectorAll('.trayNext').forEach(function(b){b.onclick=function(){var c=b.parentNode.querySelector('.trayThumbs'); if(c)c.scrollBy({left:220,behavior:'smooth'});};});
-  document.querySelectorAll('.trayAddMore').forEach(function(b){b.onclick=function(){showView('viewCatalogue');};});
+  (function(){
+    var pop=document.getElementById('addMorePop'); if(!pop)return;
+    function openAdd(){ var s=document.getElementById('amSerial'); if(s)s.value=''; var g=document.getElementById('amGo'); if(g)g.style.display='none'; pop.style.display='block'; if(s){try{s.focus({preventScroll:true});}catch(e){}} }
+    function closeAdd(){ pop.style.display='none'; }
+    window.__openAddMore=openAdd;
+    var c=document.getElementById('addMoreClose'); if(c)c.onclick=closeAdd;
+    var bd=document.getElementById('addMoreBackdrop'); if(bd)bd.onclick=closeAdd;
+    var s=document.getElementById('amSerial'), g=document.getElementById('amGo');
+    function tgl(){ if(g)g.style.display=(s&&s.value.trim())?'inline-flex':'none'; }
+    function run(q){ closeAdd(); if(window.__openSerial)window.__openSerial(q); }
+    if(s){ s.addEventListener('input',tgl); s.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); var q=s.value.trim(); if(q){ run(q); toast('Opening serial '+q); } } }); }
+    if(g)g.onclick=function(){ var q=(s&&s.value||'').trim(); if(!q)return; run(q); toast('Opening serial '+q); };
+    var sc=document.getElementById('amScan'); if(sc)sc.onclick=function(){ run(''); toast('Barcode scanned — opening product.'); };
+  })();
+  document.querySelectorAll('.trayAddMore').forEach(function(b){b.onclick=function(){ if(window.__openAddMore)window.__openAddMore(); else showView('viewCatalogue'); };});
   document.querySelectorAll('.trayClear').forEach(function(b){b.onclick=function(){tray=[];document.querySelectorAll('.addbtn.added').forEach(function(a){a.textContent='Add';a.classList.remove('added');});renderTray();};});
   renderTray();
 
@@ -979,7 +1014,8 @@
   }
   function showSearch(){ window.__sessViewed=true; if(typeof startSession==='function')startSession(); showView('viewSearch'); setToggle('product'); if(typeof updateChrome==='function') updateChrome(); var _si=document.getElementById('srchSerial'); if(_si){try{_si.focus({preventScroll:true});}catch(e){} } }
   var __scToggle=showCatalogue; showCatalogue=function(){ __scToggle(); setToggle('catalogue'); };
-  document.querySelectorAll('.tgProduct').forEach(function(b){ b.onclick=function(){ showSearch(); }; });
+  function goProductView(){ if(window.__currProd){ openPDP(window.__currProd); } else { showSearch(); } }
+  document.querySelectorAll('.tgProduct').forEach(function(b){ b.onclick=function(){ goProductView(); }; });
   document.querySelectorAll('.tgCatalogue').forEach(function(b){ b.onclick=function(){ showCatalogue(); }; });
   (function(){
     var si=document.getElementById('srchSerial'), go=document.getElementById('srchGo');
@@ -992,6 +1028,7 @@
       var info=c.lastElementChild;
       openPDP({name:info.children[1].textContent, price:info.children[2].textContent, cat:c.getAttribute('data-cat'), img:c.querySelector('img').src}); var _nb=document.querySelector('#viewPDP .navback'); if(_nb)_nb.setAttribute('data-bt','viewSearch');
     }
+    window.__openSerial=openSerial;
     function toggleGo(){ if(go) go.style.display=(si&&si.value.trim())?'inline-flex':'none'; }
     if(si){ si.addEventListener('input',toggleGo); si.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); var q=si.value.trim(); if(q){ openSerial(q); toast('Opening serial '+q); } } }); }
     if(go){ go.onclick=function(){ var q=(si&&si.value||'').trim(); if(!q) return; openSerial(q); toast('Opening serial '+q); }; }
@@ -1019,7 +1056,7 @@
   function invToggle(serial,btn){ if(!INV_PROD)return;
     var nm=invTrayName(serial);var idx=-1;for(var i=0;i<tray.length;i++){if(tray[i].name===nm){idx=i;break;}}
     if(idx>-1){tray.splice(idx,1);btn.classList.remove('on');btn.innerHTML=INV_PLUS;btn.title='Add to tray';toast('Removed '+serial+' from tray.');}
-    else{tray.push({name:nm,price:INV_PROD.price,cat:INV_PROD.cat,img:INV_PROD.img,serial:serial});btn.classList.add('on');btn.innerHTML=INV_CHECK;btn.title='Remove from tray';toast(INV_PROD.name+' ('+serial+') added to tray.');}
+    else{var it={name:nm,price:INV_PROD.price,cat:INV_PROD.cat,img:INV_PROD.img,serial:serial};tray.push(it);window.__currProd=it;btn.classList.add('on');btn.innerHTML=INV_CHECK;btn.title='Remove from tray';toast(INV_PROD.name+' ('+serial+') added to tray.');}
     if(typeof renderTray==='function')renderTray();}
   function openInventory(prod){ if(!prod)return; if(typeof startSession==='function')startSession(); window.__sessViewed=true; INV_PROD=prod;
     var t=document.getElementById('invTitle'); if(t)t.textContent=prod.name;
