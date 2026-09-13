@@ -20,7 +20,32 @@
   .homeTab:hover{color:#0A2A66;}
   .homeTab.on{color:#0A2A66;border-bottom-color:#0A2A66;}
   .sessCard{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px;background:#fff;border:1px solid #ECE5DA;border-radius:14px;padding:18px 22px;}
-  .hRangeSelect{appearance:none;-webkit-appearance:none;-moz-appearance:none;background:#0A2A66 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23FBF8F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat right 14px center;background-size:14px;font-family:'DM Sans';font-weight:600;font-size:13px;color:#FBF8F3;padding:12px 38px 12px 18px;border:none;border-radius:20px;cursor:pointer;flex:none;}
+  .hRangeWrap{position:relative;flex:none;}
+  .hRangeBtn{display:flex;align-items:center;gap:9px;background:transparent;border:1.5px solid #0A2A66;border-radius:20px;padding:11px 16px;font-family:'DM Sans';font-weight:600;font-size:13px;color:#0A2A66;cursor:pointer;white-space:nowrap;transition:background .15s;}
+  .hRangeBtn:hover{background:rgba(10,42,102,0.05);}
+  .hRangeBtn svg{transition:transform .15s;flex:none;}
+  .hRangeWrap.open .hRangeBtn svg{transform:rotate(180deg);}
+  .hRangePopover{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #ECE5DA;border-radius:14px;box-shadow:0 14px 34px rgba(10,27,51,0.16);padding:8px;display:none;z-index:30;min-width:210px;}
+  .hRangeWrap.open .hRangePopover{display:block;}
+  .hRangeOpt{padding:11px 14px;border-radius:9px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#1a1917;cursor:pointer;}
+  .hRangeOpt:hover{background:rgba(200,161,74,0.1);}
+  .hRangeOpt.on{color:#0A2A66;font-weight:700;background:rgba(10,42,102,0.06);}
+  .hCalendar{margin-top:6px;padding-top:10px;border-top:1px solid #ECE5DA;width:272px;}
+  .hCalHead{display:flex;align-items:center;justify-content:space-between;padding:0 4px 8px;}
+  .hCalNavBtn{background:none;border:none;cursor:pointer;color:#0A2A66;padding:4px;display:flex;border-radius:6px;}
+  .hCalNavBtn:hover{background:rgba(10,42,102,0.06);}
+  .hCalMonthLabel{font-family:'DM Sans';font-weight:700;font-size:13px;color:#0A2A66;}
+  .hCalGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:0 4px;}
+  .hCalDow{font-family:'DM Sans';font-weight:600;font-size:10px;color:#9B8F7E;text-align:center;padding:4px 0;}
+  .hCalDay{font-family:'DM Sans';font-weight:500;font-size:12px;color:#1a1917;text-align:center;padding:7px 0;border-radius:8px;cursor:pointer;}
+  .hCalDay:hover{background:rgba(200,161,74,0.15);}
+  .hCalDay.disabled{color:#D9D0C2;cursor:default;pointer-events:none;}
+  .hCalDay.inrange{background:rgba(10,42,102,0.08);border-radius:0;}
+  .hCalDay.start,.hCalDay.end{background:#0A2A66;color:#fff;border-radius:8px;}
+  .hCalFooter{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 4px 2px;}
+  .hCalRangeLabel{font-family:'DM Sans';font-weight:500;font-size:11.5px;color:#7C7268;}
+  .hCalApplyBtn{height:36px;padding:0 16px;border:none;border-radius:9px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:12.5px;cursor:pointer;flex:none;transition:opacity .15s;}
+  .hCalApplyBtn.disabled{opacity:.4;pointer-events:none;}
   .hStatCard{background:#fff;border:1px solid #ECE5DA;border-radius:14px;padding:13px 16px;width:150px;flex:none;}
   .hStatCard.target{background:linear-gradient(135deg,#FAF8F5 0%,#ECE6DC 100%);border:1px solid #E7DCC4;}
   .hStatLab{font-family:'DM Sans';font-weight:700;font-size:10px;letter-spacing:0.8px;text-transform:uppercase;color:#9B8F7E;}
@@ -190,20 +215,35 @@
           </div>
           <button id="startNewBtn" class="save-btn" style="width:200px;height:44px;padding:0;font-size:14px;font-weight:600;flex:none;">Start a New Session</button>
         </div>
-        <div style="display:flex;align-items:center;gap:16px;margin-top:24px;">
-          <select id="hRangeSelect" class="hRangeSelect">
-            <option value="today">Today</option>
-            <option value="week">This Week</option>
-            <option value="month">This Month</option>
-            <option value="custom">Custom</option>
-          </select>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:24px;">
           <div id="hStatsGrid" style="display:flex;gap:12px;">
             <div class="hStatCard"><div class="hStatLab">Sessions</div><div class="hStatVal" id="hSessions">0</div></div>
             <div class="hStatCard"><div class="hStatLab">Converted</div><div class="hStatVal" id="hConverted">0 <span class="hStatSub" id="hConvPct">· 0%</span></div></div>
             <div class="hStatCard"><div class="hStatLab">Sales value</div><div class="hStatVal" id="hSales" style="font-size:18px;">&#8377;0</div></div>
             <div class="hStatCard target"><div class="hStatLab gold">Target progress</div><div class="hStatVal" id="hTargetPct">0%</div><div class="hProgressTrack"><div class="hProgressFill" id="hProgressFill" style="width:0%;"></div></div></div>
           </div>
-          <div id="hCustomNote" style="display:none;border:1.5px dashed #C8A14A;border-radius:14px;padding:13px 18px;align-items:center;gap:10px;background:#FAF8F5;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#B89149" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span style="font-family:'DM Sans';font-size:13px;color:#7C7268;">Pick a date range to see custom stats</span></div>
+          <div class="hRangeWrap" id="hRangeWrap">
+            <button type="button" class="hRangeBtn" id="hRangeBtn"><span id="hRangeLabel">Today</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#0A2A66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            <div class="hRangePopover" id="hRangePopover">
+              <div class="hRangeOpt on" data-val="today">Today</div>
+              <div class="hRangeOpt" data-val="week">This Week</div>
+              <div class="hRangeOpt" data-val="month">This Month</div>
+              <div class="hRangeOpt" data-val="custom">Custom range</div>
+              <div class="hCalendar" id="hCalendar" style="display:none;">
+                <div class="hCalHead">
+                  <button type="button" class="hCalNavBtn" id="hCalPrev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                  <div class="hCalMonthLabel" id="hCalMonthLabel">Month Year</div>
+                  <button type="button" class="hCalNavBtn" id="hCalNext"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                </div>
+                <div class="hCalGrid"><div class="hCalDow">S</div><div class="hCalDow">M</div><div class="hCalDow">T</div><div class="hCalDow">W</div><div class="hCalDow">T</div><div class="hCalDow">F</div><div class="hCalDow">S</div></div>
+                <div class="hCalGrid" id="hCalDaysGrid"></div>
+                <div class="hCalFooter">
+                  <span class="hCalRangeLabel" id="hCalRangeLabel">Select start date</span>
+                  <button type="button" class="hCalApplyBtn disabled" id="hCalApply">Apply</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div style="display:flex;gap:30px;border-bottom:1px solid #ECE5DA;margin-top:26px;">
           <div class="homeTab on" data-tab="all">All</div>
@@ -749,16 +789,46 @@
   var SESSIONS=[];
   function metaLine(who,when,intent,pieces){var p=pieces?('<span>&middot;</span><span>'+pieces+' piece'+(pieces===1?'':'s')+'</span>'):'';return '<div style="display:flex;align-items:center;gap:8px;margin-top:8px;font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;flex-wrap:wrap;"><span>'+who+'</span><span>&middot;</span><span>'+when+'</span><span>&middot;</span><span style="color:#0A2A66;font-weight:600;">'+intent+'</span>'+p+'</div>';}
   var CHECK_SVG='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  function sessionCardHTML(s){
+    var isP=s.status==='purchased';
+    var badge=isP?'<span class="purBadge">Purchased</span>':'<span class="noPurBadge">Didn&rsquo;t purchase</span>';
+    var right='<span class="compTag'+(isP?'':' neutral')+'">'+(isP?CHECK_SVG:'')+'Completed</span>';
+    return '<div class="sessCard" data-stype="'+(isP?'purchased':'notpurchased')+'" style="margin-top:14px;"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+s.name+'</span><span style="color:#D9D0C2;">|</span>'+badge+'</div>'+metaLine(s.who,s.when,s.intent,s.pieces)+'</div>'+right+'</div>';
+  }
+  var DEMO_SESSION_POOL=[
+    {name:'Ritika Sharma',who:'For self',intent:'Looking for Rings',pieces:2,when:'Yesterday',status:'purchased',amount:186500},
+    {name:'Guest_014',who:'Walk-in',intent:'Exploring',pieces:1,when:'2 days ago',status:'not_purchased',amount:0},
+    {name:'Ananya Verma',who:'Gifting',intent:'Looking for Earrings',pieces:3,when:'2 days ago',status:'purchased',amount:94200},
+    {name:'Guest_009',who:'For self',intent:'Looking for Necklaces',pieces:1,when:'3 days ago',status:'not_purchased',amount:0},
+    {name:'Priya Nair',who:'For self',intent:'Wedding shopping',pieces:5,when:'4 days ago',status:'purchased',amount:412300},
+    {name:'Guest_022',who:'Gifting',intent:'Looking for Bangles',pieces:2,when:'5 days ago',status:'purchased',amount:76900},
+    {name:'Meera Iyer',who:'Walk-in',intent:'Exploring',pieces:1,when:'6 days ago',status:'not_purchased',amount:0},
+    {name:'Kavya Reddy',who:'Anniversary',intent:'Looking for Pendants',pieces:2,when:'1 week ago',status:'purchased',amount:158700}
+  ];
+  function demoSessionsFor(range){
+    if(range==='week') return DEMO_SESSION_POOL.slice(0,6);
+    if(range==='month') return DEMO_SESSION_POOL.slice(0,8);
+    if(range==='custom'){
+      var days=1;
+      if(HOME_CUSTOM_RANGE) days=Math.max(1,Math.round((HOME_CUSTOM_RANGE.end.getTime()-HOME_CUSTOM_RANGE.start.getTime())/86400000)+1);
+      var n=Math.max(1,Math.min(DEMO_SESSION_POOL.length,Math.round(days*8/30)));
+      return DEMO_SESSION_POOL.slice(0,n);
+    }
+    return [];
+  }
   function renderHome(){var ong=document.getElementById('homeOngoing'),emp=document.getElementById('homeEmpty'),cnt=document.getElementById('homeCount'),snb=document.getElementById('startNewBtn');if(!ong)return;
-    var active=(typeof sessStarted!=='undefined'&&sessStarted&&!sessEnded);var cards='';
+    var cards='';var total=0;
+    if(HOME_RANGE==='today'){
+    var active=(typeof sessStarted!=='undefined'&&sessStarted&&!sessEnded);
     if(active){var who=(sel&&sel.who)?sel.who:'Walk-in';var mins=sessSecs<60?'Just now':(Math.floor(sessSecs/60)+' min ago');var intent=(sel&&sel.cats&&sel.cats.length)?('Looking for '+sel.cats[0]):((sel&&sel.occ)?sel.occ:'Exploring');var nm=(CUR&&CUR.name&&CUR.name!=='Guest')?CUR.name:'Guest_001';
       cards+='<div class="sessCard" data-stype="ongoing"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+nm+'</span><span style="color:#D9D0C2;">|</span><span class="ongoBadge">Ongoing Session</span></div>'+metaLine(who,mins,intent,0)+'</div><button class="resumeBtn" id="resumeBtn">Resume Session <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>';}
-    SESSIONS.forEach(function(s){
-      var isP=s.status==='purchased';
-      var badge=isP?'<span class="purBadge">Purchased</span>':'<span class="noPurBadge">Didn\u2019t purchase</span>';
-      var right='<span class="compTag'+(isP?'':' neutral')+'">'+(isP?CHECK_SVG:'')+'Completed</span>';
-      cards+='<div class="sessCard" data-stype="'+(isP?'purchased':'notpurchased')+'" style="margin-top:14px;"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+s.name+'</span><span style="color:#D9D0C2;">|</span>'+badge+'</div>'+metaLine(s.who,s.when,s.intent,s.pieces)+'</div>'+right+'</div>';});
-    var total=(active?1:0)+SESSIONS.length;
+    SESSIONS.forEach(function(s){cards+=sessionCardHTML(s);});
+    total=(active?1:0)+SESSIONS.length;
+    } else {
+      var demo=demoSessionsFor(HOME_RANGE);
+      demo.forEach(function(s){cards+=sessionCardHTML(s);});
+      total=demo.length;
+    }
     if(total>0){ong.innerHTML=cards;ong.style.display='block';if(emp)emp.style.display='none';if(cnt)cnt.textContent=' ('+total+')';}
     else{ong.innerHTML='';ong.style.display='none';if(emp)emp.style.display='block';if(cnt)cnt.textContent='';}
     if(snb)snb.classList.remove('disabled');
@@ -766,12 +836,11 @@
     if(typeof window.__applyHomeTab==='function')window.__applyHomeTab();
     if(typeof window.__renderHomeStats==='function')window.__renderHomeStats();}
   var HOME_RANGE='today';
+  var HOME_CUSTOM_RANGE=null;
   var HOME_STATIC={week:{sessions:34,converted:11,sales:2146900,target:2800000},month:{sessions:142,converted:49,sales:9218400,target:11000000}};
   function renderHomeStats(){
-    var sEl=document.getElementById('hSessions'),cEl=document.getElementById('hConverted'),pEl=document.getElementById('hConvPct'),salEl=document.getElementById('hSales'),tEl=document.getElementById('hTargetPct'),fEl=document.getElementById('hProgressFill'),grid=document.getElementById('hStatsGrid'),note=document.getElementById('hCustomNote');
+    var sEl=document.getElementById('hSessions'),cEl=document.getElementById('hConverted'),pEl=document.getElementById('hConvPct'),salEl=document.getElementById('hSales'),tEl=document.getElementById('hTargetPct'),fEl=document.getElementById('hProgressFill');
     if(!sEl)return;
-    if(HOME_RANGE==='custom'){ if(grid)grid.style.display='none'; if(note)note.style.display='flex'; return; }
-    if(grid)grid.style.display='flex'; if(note)note.style.display='none';
     var sessions,converted,sales,target;
     if(HOME_RANGE==='today'){
       var purchasedToday=SESSIONS.filter(function(s){return s.status==='purchased';});
@@ -779,7 +848,13 @@
       converted=purchasedToday.length;
       sales=purchasedToday.reduce(function(a,s){return a+(s.amount||0);},0);
       target=500000;
-    } else { var d=HOME_STATIC[HOME_RANGE]; sessions=d.sessions; converted=d.converted; sales=d.sales; target=d.target; }
+    } else if(HOME_RANGE==='custom'&&HOME_CUSTOM_RANGE){
+      var days=Math.max(1,Math.round((HOME_CUSTOM_RANGE.end.getTime()-HOME_CUSTOM_RANGE.start.getTime())/86400000)+1);
+      sessions=Math.max(1,Math.round(142/30*days));
+      converted=Math.min(sessions,Math.round(49/30*days));
+      sales=Math.round(9218400/30*days);
+      target=Math.round(11000000/30*days);
+    } else { var d=HOME_STATIC[HOME_RANGE]||HOME_STATIC.week; sessions=d.sessions; converted=d.converted; sales=d.sales; target=d.target; }
     var pct=sessions>0?Math.round((converted/sessions)*100):0;
     var tpct=target>0?Math.min(100,Math.round((sales/target)*100)):0;
     sEl.textContent=sessions;
@@ -790,7 +865,87 @@
     if(fEl)fEl.style.width=tpct+'%';
   }
   window.__renderHomeStats=renderHomeStats;
-  var _hrs=document.getElementById('hRangeSelect'); if(_hrs) _hrs.onchange=function(){ HOME_RANGE=this.value; renderHomeStats(); };
+  // ---- range filter (stroke pill + Airbnb-style calendar) ----
+  var hRangeWrap=document.getElementById('hRangeWrap'),hRangeBtn=document.getElementById('hRangeBtn'),hRangeLabel=document.getElementById('hRangeLabel');
+  if(hRangeBtn) hRangeBtn.onclick=function(e){ e.stopPropagation(); if(hRangeWrap) hRangeWrap.classList.toggle('open'); };
+  document.addEventListener('click',function(e){ if(hRangeWrap && hRangeWrap.classList.contains('open') && !hRangeWrap.contains(e.target)) hRangeWrap.classList.remove('open'); });
+  var _TODAY0=(function(){var d=new Date();d.setHours(0,0,0,0);return d;})();
+  var _calViewMonth=(function(){var d=new Date(_TODAY0.getTime());d.setDate(1);return d;})();
+  var _calSelStart=null,_calSelEnd=null;
+  function fmtCalDate(d){return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+  function updateCalFooter(){
+    var lbl=document.getElementById('hCalRangeLabel'),btn=document.getElementById('hCalApply');
+    if(!lbl||!btn)return;
+    if(_calSelStart&&_calSelEnd){ lbl.textContent=fmtCalDate(_calSelStart)+' – '+fmtCalDate(_calSelEnd); btn.classList.remove('disabled'); }
+    else if(_calSelStart){ lbl.textContent=fmtCalDate(_calSelStart)+' – select end date'; btn.classList.add('disabled'); }
+    else { lbl.textContent='Select start date'; btn.classList.add('disabled'); }
+  }
+  function renderCalendar(){
+    var lbl=document.getElementById('hCalMonthLabel'); if(lbl) lbl.textContent=_calViewMonth.toLocaleString('en-US',{month:'long',year:'numeric'});
+    var grid=document.getElementById('hCalDaysGrid'); if(!grid) return;
+    var y=_calViewMonth.getFullYear(),m=_calViewMonth.getMonth();
+    var firstDow=new Date(y,m,1).getDay();
+    var daysInMonth=new Date(y,m+1,0).getDate();
+    var html='';
+    for(var i=0;i<firstDow;i++) html+='<div class="hCalDay disabled"></div>';
+    for(var d=1;d<=daysInMonth;d++){
+      var cur=new Date(y,m,d);
+      var cls='hCalDay';
+      if(cur.getTime()>_TODAY0.getTime()) cls+=' disabled';
+      if(_calSelStart&&cur.getTime()===_calSelStart.getTime()) cls+=' start';
+      if(_calSelEnd&&cur.getTime()===_calSelEnd.getTime()) cls+=' end';
+      if(_calSelStart&&_calSelEnd&&cur.getTime()>_calSelStart.getTime()&&cur.getTime()<_calSelEnd.getTime()) cls+=' inrange';
+      html+='<div class="'+cls+'" data-ts="'+cur.getTime()+'">'+d+'</div>';
+    }
+    grid.innerHTML=html;
+    grid.querySelectorAll('.hCalDay:not(.disabled)').forEach(function(el){
+      el.onclick=function(e){
+        e.stopPropagation();
+        var picked=new Date(parseInt(el.getAttribute('data-ts'),10));
+        if(!_calSelStart||(_calSelStart&&_calSelEnd)){ _calSelStart=picked; _calSelEnd=null; }
+        else if(picked.getTime()<_calSelStart.getTime()){ _calSelEnd=_calSelStart; _calSelStart=picked; }
+        else { _calSelEnd=picked; }
+        renderCalendar();
+      };
+    });
+    updateCalFooter();
+  }
+  var hCalPrev=document.getElementById('hCalPrev'),hCalNext=document.getElementById('hCalNext'),hCalApply=document.getElementById('hCalApply');
+  if(hCalPrev) hCalPrev.onclick=function(e){ e.stopPropagation(); _calViewMonth=new Date(_calViewMonth.getFullYear(),_calViewMonth.getMonth()-1,1); renderCalendar(); };
+  if(hCalNext) hCalNext.onclick=function(e){ e.stopPropagation(); _calViewMonth=new Date(_calViewMonth.getFullYear(),_calViewMonth.getMonth()+1,1); renderCalendar(); };
+  if(hCalApply) hCalApply.onclick=function(e){
+    e.stopPropagation();
+    if(hCalApply.classList.contains('disabled')||!_calSelStart||!_calSelEnd) return;
+    HOME_CUSTOM_RANGE={start:_calSelStart,end:_calSelEnd};
+    HOME_RANGE='custom';
+    if(hRangeLabel) hRangeLabel.textContent=fmtCalDate(_calSelStart)+' – '+fmtCalDate(_calSelEnd);
+    if(hRangeWrap) hRangeWrap.classList.remove('open');
+    renderHomeStats();
+    if(typeof renderHome==='function') renderHome();
+  };
+  document.querySelectorAll('.hRangeOpt').forEach(function(opt){
+    opt.onclick=function(e){
+      e.stopPropagation();
+      var val=opt.getAttribute('data-val');
+      document.querySelectorAll('.hRangeOpt').forEach(function(o){o.classList.remove('on');});
+      opt.classList.add('on');
+      var cal=document.getElementById('hCalendar');
+      if(val==='custom'){
+        if(cal) cal.style.display='block';
+        _calViewMonth=HOME_CUSTOM_RANGE?new Date(HOME_CUSTOM_RANGE.start.getFullYear(),HOME_CUSTOM_RANGE.start.getMonth(),1):new Date(_TODAY0.getFullYear(),_TODAY0.getMonth(),1);
+        _calSelStart=HOME_CUSTOM_RANGE?HOME_CUSTOM_RANGE.start:null;
+        _calSelEnd=HOME_CUSTOM_RANGE?HOME_CUSTOM_RANGE.end:null;
+        renderCalendar();
+        return;
+      }
+      if(cal) cal.style.display='none';
+      HOME_RANGE=val;
+      if(hRangeLabel) hRangeLabel.textContent=(val==='today'?'Today':(val==='week'?'This Week':'This Month'));
+      if(hRangeWrap) hRangeWrap.classList.remove('open');
+      renderHomeStats();
+      if(typeof renderHome==='function') renderHome();
+    };
+  });
   function sessSnapshot(status,detail){var nm=(CUR&&CUR.name&&CUR.name!=='Guest')?CUR.name:'Guest_001';var who=(sel&&sel.who)?sel.who:'Walk-in';var intent=(sel&&sel.cats&&sel.cats.length)?('Looking for '+sel.cats[0]):((sel&&sel.occ)?sel.occ:'Exploring');var amt=(status==='purchased'&&window.__orderTotal)?window.__orderTotal:0;return {name:nm,who:who,intent:intent,pieces:(typeof tray!=='undefined'?tray.length:0),when:'Just now',status:status||'not_purchased',detail:detail||'',amount:amt};}
   function finalizeSession(status,detail){ if(window.__sessViewed){ SESSIONS.unshift(sessSnapshot(status,detail)); } }
   window.__finalizeSession=finalizeSession;
